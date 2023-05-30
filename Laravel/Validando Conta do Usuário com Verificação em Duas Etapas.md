@@ -1,5 +1,5 @@
 ---
-id: 9949c8f2-cc32-4784-8919-3d56dae6454d
+id: 994ae9f9-b106-4d00-bd82-dab8c95ede56
 title: "Validando Conta do Usuário com Verificação em Duas Etapas"
 summary: "Utilize a estratégia de verificação em duas etapas (2-Step Verification) para validar o cadastro de uma nova conta do usuário."
 ---
