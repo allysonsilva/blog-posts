@@ -62,57 +62,55 @@ Será muito simples 😎, tão simples quanto colocar uma propriedade do tipo `a
 
 Primeira coisa a ser feito é criar uma classe **BaseModel**, para sobrescrever o método `newEloquentBuilder` e ter os métodos e propriedades que esssa estratégia requer.
 
-- `BaseModel.php`
+```php
+<?php
 
-	```php
-	<?php
+namespace App\Support\ORM;
 
-	namespace App\Support\ORM;
+use Illuminate\Database\Eloquent\Model;
 
-	use Illuminate\Database\Eloquent\Model;
+class BaseModel extends Model
+{
+    /**
+     * Columns that should be manipulated MySQL native encryption.
+     *
+     * @var string[]
+     */
+    protected array $encryptedColumns = [];
 
-	class BaseModel extends Model
-	{
-	    /**
-	     * Columns that should be manipulated MySQL native encryption.
-	     *
-	     * @var string[]
-	     */
-	    protected array $encryptedColumns = [];
+    /**
+     * Retrieves the columns that will be manipulated in an encrypted way.
+     *
+     * @return string[]
+     */
+    public function getEncryptedColumns(): array
+    {
+	return $this->encryptedColumns;
+    }
 
-	    /**
-	     * Retrieves the columns that will be manipulated in an encrypted way.
-	     *
-	     * @return string[]
-	     */
-	    public function getEncryptedColumns(): array
-	    {
-	        return $this->encryptedColumns;
-	    }
+    /**
+     * Create a new Eloquent query builder for the model.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function newEloquentBuilder($query): BaseEloquentBuilder
+    {
+	return new BaseEloquentBuilder($query);
+    }
 
-	    /**
-	     * Create a new Eloquent query builder for the model.
-	     *
-	     * @param  \Illuminate\Database\Query\Builder  $query
-	     *
-	     * @return \Illuminate\Database\Eloquent\Builder|static
-	     */
-	    public function newEloquentBuilder($query): BaseEloquentBuilder
-	    {
-	        return new BaseEloquentBuilder($query);
-	    }
-
-	    /**
-	     * Begin querying the model.
-	     *
-	     * @return \App\Support\ORM\BaseEloquentBuilder
-	     */
-	    public static function query(): BaseEloquentBuilder
-	    {
-	        return parent::query();
-	    }
-	}
-	```
+    /**
+     * Begin querying the model.
+     *
+     * @return \App\Support\ORM\BaseEloquentBuilder
+     */
+    public static function query(): BaseEloquentBuilder
+    {
+	return parent::query();
+    }
+}
+```
 
 ### Criando o **BaseEloquentBuilder** e **BaseQueryBuilder** para usar `AES_ENCRYPT`
 
