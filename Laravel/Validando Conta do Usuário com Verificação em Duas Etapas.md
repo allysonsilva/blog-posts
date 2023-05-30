@@ -1,7 +1,7 @@
 ---
 id: 9949c8f2-cc32-4784-8919-3d56dae6454d
 title: "Validando Conta do Usuário com Verificação em Duas Etapas"
-summary: "Utilize a estratégia de verificação em duas etapas (2-Step Verification) para validar o cadastro de uma nova conta do usuário"
+summary: "Utilize a estratégia de verificação em duas etapas (2-Step Verification) para validar o cadastro de uma nova conta do usuário."
 ---
 
 Quando um novo usuário é cadastrado no sistema, normalmente é enviado um e-mail para o mesmo tendo em seu conteúdo um "*link de ativação/verificação*" para saber se o e-mail colocado no formulário de cadastro realmente pertence a ele. Isso é útil quando o fluxo de um novo cadastro não deve ser bloqueado quando o mesmo não clicar no link enviado por e-mail, assim, ele poderia se cadastrar e já utilizar a plataforma de imediato com algumas ressalvas acredito, por conta do seu cadastro não estar 100% completo (sem ter o e-mail validado nesse casso).
