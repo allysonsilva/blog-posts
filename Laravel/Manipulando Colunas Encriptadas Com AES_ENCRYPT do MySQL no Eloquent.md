@@ -191,7 +191,7 @@ class BaseQueryBuilder extends QueryBuilder
     {
         $this->encryptedColumns = $encryptedColumns;
 
-	$this->grammar->setEncryptedColumns($this->getEncryptedColumns());
+	    $this->grammar->setEncryptedColumns($this->getEncryptedColumns());
 
         return $this;
     }
@@ -371,7 +371,7 @@ class MySqlGrammarEncrypt extends MySqlGrammar
     {
         $this->encryptedColumns = $encryptedColumns;
 
-	return $this;
+	    return $this;
     }
 
     /**
