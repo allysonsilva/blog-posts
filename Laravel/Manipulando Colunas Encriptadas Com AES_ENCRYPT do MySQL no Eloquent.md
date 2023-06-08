@@ -191,6 +191,8 @@ class BaseQueryBuilder extends QueryBuilder
     {
         $this->encryptedColumns = $encryptedColumns;
 
+	$this->grammar->setEncryptedColumns($this->getEncryptedColumns());
+
         return $this;
     }
 
@@ -353,9 +355,23 @@ class MySqlGrammarEncrypt extends MySqlGrammar
     {
         $this->AESEncryptKey = config('app.aesencrypt_key');
 
-        if (empty($this->AESEncryptKey)):
+        if (empty($this->AESEncryptKey)) {
             throw new InvalidArgumentException('Set encryption key in .env file, use this alias APP_AESENCRYPT_KEY');
-        endif;
+        }
+    }
+    
+    /**
+     * Columns that will be handled encrypted.
+     *
+     * @param string[] $encryptedColumns
+     *
+     * @return $this
+     */
+    public function setEncryptedColumns(array $encryptedColumns): static
+    {
+        $this->encryptedColumns = $encryptedColumns;
+
+	return $this;
     }
 
     /**
