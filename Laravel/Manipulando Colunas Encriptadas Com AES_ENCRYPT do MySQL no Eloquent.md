@@ -1,5 +1,5 @@
 ---
-id: 9949c8f2-cc32-4784-8919-3d56dae6454d
+id: 9a3c1041-cf7a-42e7-b79c-d52b8095c34b
 title: "Manipulando Colunas Encriptadas com AES_ENCRYPT do MySQL no Eloquent"
 summary: "Estenda as funções nativas de CRUD do Eloquent para manipular colunas encriptadas 🔒"
 ---
