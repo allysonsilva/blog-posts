@@ -191,7 +191,7 @@ class BaseQueryBuilder extends QueryBuilder
     {
         $this->encryptedColumns = $encryptedColumns;
 
-	    $this->grammar->setEncryptedColumns($this->getEncryptedColumns());
+        $this->grammar->setEncryptedColumns($this->getEncryptedColumns());
 
         return $this;
     }
@@ -371,7 +371,7 @@ class MySqlGrammarEncrypt extends MySqlGrammar
     {
         $this->encryptedColumns = $encryptedColumns;
 
-	    return $this;
+        return $this;
     }
 
     /**
@@ -429,6 +429,10 @@ class MySqlGrammarEncrypt extends MySqlGrammar
         $this->encryptedColumns = [];
 
         return collect($values)->map(function ($value, $key) use ($encryptedColumns) {
+            if (is_array($value)) {
+                return $this->rawSaveColumns($encryptedColumns, $value);
+            }
+
             if (in_array($key, $encryptedColumns)) {
                 return new RawExpression($this->wrapValueEncrypt($value));
             }
