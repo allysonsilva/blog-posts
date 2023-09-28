@@ -1,5 +1,5 @@
 ---
-id: 9953d8dd-522f-4a16-af06-7ba7d88f39a9
+id: 9a3e6921-0c1d-41a3-b968-2f8774c4e267
 title: "Criando Feed de Casos de Usos Usando Notifications com Channel Personalizado de Banco de Dados"
 summary: "Crie um feed simples com notifications do Laravel 📌"
 ---
