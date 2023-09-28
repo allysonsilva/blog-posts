@@ -17,8 +17,8 @@ Se você **não quiser reutilizar/automatizar o que será feito a seguir**, quis
 
 ```php
 $model = Model::create([
-	'colA' => DB::raw("AES_ENCRYPT('value1', 'secretkey')"),
-	'colB' => DB::raw("AES_ENCRYPT('value1', 'secretkey')"),
+    'colA' => DB::raw("AES_ENCRYPT('value1', 'secretkey')"),
+    'colB' => DB::raw("AES_ENCRYPT('value1', 'secretkey')"),
 ]);
 ```
 
@@ -26,8 +26,8 @@ E para recuperar os dados encriptados, teria que fazer o **decrypt** da coluna c
 
 ```php
 Model::select(
-	DB::raw('AES_DECRYPT(`colA`, "secretkey")'),
-	DB::raw('AES_DECRYPT(`colB`, "secretkey")'),
+    DB::raw('AES_DECRYPT(`colA`, "secretkey")'),
+    DB::raw('AES_DECRYPT(`colB`, "secretkey")'),
 );
 ```
 
@@ -47,15 +47,15 @@ Para usar a encriptação de forma **extensível**, **reutilizável**, **encapsu
 Será muito simples 😎, tão simples quanto colocar uma propriedade do tipo `array` contendo as colunas que serão manipuladas de forma encriptadas, e deixar toda manipulação/responsabilidade para as novas classes junto com Eloquent, basicamente a *Model* deverá ter a seguinte propriedade com as colunas que devem ser manipuladas de forma encriptadas:
 
 ```php
-    /**
-     * Columns that should be manipulated MySQL native encryption.
-     *
-     * @var string[]
-     */
-    protected array $encryptedColumns = [
-        'colA',
-        'colA',
-    ];
+/**
+ * Columns that should be manipulated MySQL native encryption.
+ *
+ * @var string[]
+ */
+protected array $encryptedColumns = [
+    'colA',
+    'colA',
+];
 ```
 
 ### Criando o **BaseModel**
@@ -85,7 +85,7 @@ class BaseModel extends Model
      */
     public function getEncryptedColumns(): array
     {
-	return $this->encryptedColumns;
+        return $this->encryptedColumns;
     }
 
     /**
@@ -97,7 +97,7 @@ class BaseModel extends Model
      */
     public function newEloquentBuilder($query): BaseEloquentBuilder
     {
-	return new BaseEloquentBuilder($query);
+        return new BaseEloquentBuilder($query);
     }
 
     /**
@@ -107,7 +107,7 @@ class BaseModel extends Model
      */
     public static function query(): BaseEloquentBuilder
     {
-	return parent::query();
+        return parent::query();
     }
 }
 ```
@@ -493,8 +493,8 @@ Supondo que tenhamos as colunas que devem ser manipuladas de forma encriptadas e
  * @var string[]
  */
 protected array $encryptedColumns = [
-	'colA',
-	'colB',
+    'colA',
+    'colB',
 ];
 ```
 
@@ -504,13 +504,13 @@ Se for feito: `MyModel::whereId(1)->first()` no Eloquent, a query no banco de da
 
 ```sql
 SELECT
-	*,
-	AES_DECRYPT( `colA`, 'secretkey' ) AS 'colA',
-	AES_DECRYPT( `colB`, 'secretkey' ) AS 'colB' 
+    *,
+    AES_DECRYPT( `colA`, 'secretkey' ) AS 'colA',
+    AES_DECRYPT( `colB`, 'secretkey' ) AS 'colB' 
 FROM
-	`any_table` 
+    `any_table` 
 WHERE 
-	`id` = 1 
+    `id` = 1 
 LIMIT 1
 ```
 
@@ -532,12 +532,12 @@ A seguinte **query** seria executado no MySQL:
 ```sql
 INSERT INTO `any_table` ( `colA`, `name`, `colB`, `description` )
 VALUES
-	(
-		AES_ENCRYPT( 'Nisi neque consectetur', 'secretkey' ),
-		'Mussum Ipsum',
-		AES_ENCRYPT( 'xyz', 'secretkey' ),
-		'Mussum Ipsum, cacilds vidis litro abertis.' 
-	)
+    (
+        AES_ENCRYPT( 'Nisi neque consectetur', 'secretkey' ),
+        'Mussum Ipsum',
+        AES_ENCRYPT( 'xyz', 'secretkey' ),
+        'Mussum Ipsum, cacilds vidis litro abertis.' 
+    )
 ```
 
 #### `UPDATE`
@@ -566,12 +566,12 @@ Qualquer uma das forma acima terá a mesma instrução de `UPDATE`:
 
 ```sql
 UPDATE 
-	`any_table` 
+    `any_table` 
 SET 
-	`colA` = AES_ENCRYPT( 'ABC', 'secretkey' ),
-	`name` = 'XYZ',
-	`colB` = AES_ENCRYPT( 'Mussum', 'secretkey' ),
-	`description` = 'Ipsum' 
+    `colA` = AES_ENCRYPT( 'ABC', 'secretkey' ),
+    `name` = 'XYZ',
+    `colB` = AES_ENCRYPT( 'Mussum', 'secretkey' ),
+    `description` = 'Ipsum' 
 WHERE `id` = 1
 ```
 
