@@ -1,5 +1,5 @@
 ---
-id: 994ae9f9-b106-4d00-bd82-dab8c95ede56
+id: 9a3e4fdb-678a-4697-b7d7-ef2054e56018
 title: "Validando Conta do Usuário com Verificação em Duas Etapas"
 summary: "Utilize a estratégia de verificação em duas etapas (2-Step Verification) para validar o cadastro de uma nova conta do usuário."
 ---
@@ -112,7 +112,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone_verified_at' => 'datetime',
     ];
 
-	/**
+    /**
      * Retrieve common user data.
      *
      * @return array
@@ -402,7 +402,7 @@ As seguintes rotas, servem para exemplificar o fluxo que acontecerá, que é:
 
 1. O usuário se cadastra na rota de `signup`, e nesse mesmo endpoint/código, após um novo registro ser inserido na tabela de `users`, então, é disparado o primeiro Job (`SendUserVerificationCodeBySMS`), que enviará o code por SMS para o telefone celular do usuário inserido no formulário de cadastro.
 2. Após ter recebido o code via SMS no telefone, é então validado na rota de `account.verify` no endpoint de `POST /account/verify`.
-	1. Após o code estar válido, então, será executado o segundo Job que nesse caso é pra enviar o code via e-mail (`SendUserVerificationCodeByEmail`).
+    1. Após o code estar válido, então, será executado o segundo Job que nesse caso é pra enviar o code via e-mail (`SendUserVerificationCodeByEmail`).
 3. O usuário recebendo o code no seu e-mail que colocou no formulário de cadastro, novamente deve ser validado em `POST /account/verify`.
 4. O code do e-mail estando válido, então, o callback pode ser o que o negócio determina. Pode ser alterado o status do usuário, pode ser feito várias coisas, isso quem vai decidir é o negócio.
 5. Se por acaso o usuário fechou a aplicação ou precisar reenviar o code por SMS ou e-mail, então, pode ser usando o endpoint de `POST /account/verify/resend`.
@@ -675,9 +675,9 @@ class UserService
 
         $this->verifyEmailCode($user, $code, $type);
 
-		// Aqui pode ser feito alguma ação de negócio quando ambos os steps (SMS/Telefone e E-mail)
-		// forem validados com sucesso, nesse caso, o code está "ativando" a conta do usuário que 
-		// outrora era considerada como "pendente de ativação"
+        // Aqui pode ser feito alguma ação de negócio quando ambos os steps (SMS/Telefone e E-mail)
+        // forem validados com sucesso, nesse caso, o code está "ativando" a conta do usuário que 
+        // outrora era considerada como "pendente de ativação"
         $user->activateAccount();
     }
 
@@ -806,7 +806,7 @@ public function accountVerifyResend(AuthAccountVerifyResendRequest $request): Js
 
     $this->userService->accountVerifyResend($user, $request->type());
 
-	return response()->json(status: JsonResponse::HTTP_NO_CONTENT);
+    return response()->json(status: JsonResponse::HTTP_NO_CONTENT);
 }
 ```
 
@@ -872,7 +872,7 @@ Agora é só enviar a request com o seguinte payload:
 
 ```json
 {
-	"type":  "sms or email"
+    "type":  "sms or email"
 }
 ```
 
@@ -941,8 +941,8 @@ class ForgotController extends LaravelBaseController
         $status = Password::broker()->sendResetLink(['email' => $user->getEmailForPasswordReset()], $callbackResetLink);
 
         if ($status === Password::RESET_LINK_SENT) {
-			return response()->json(['user' => ['email' => $user->getEmailForPasswordReset()], 'token' => $token]]);
-		}
+            return response()->json(['user' => ['email' => $user->getEmailForPasswordReset()], 'token' => $token]]);
+        }
 
         throw ValidationException::withMessages(['email' => __($status)]);
     }
