@@ -1,5 +1,5 @@
 ---
-id: 994bc7f9-2e77-4abe-b6b4-b7631b503571
+id: 9a3e67e4-c623-414b-91d5-a3717cf522e2
 title: "Autenticando Usuário Para Uso no Telescope"
 summary: "Veja a estratégia de autenticação utilizada no uso do Laravel Telescope 🕵️‍♂️"
 ---
