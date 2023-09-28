@@ -1,5 +1,5 @@
 ---
-id: 9963a259-bc4b-4ffa-958e-b6f1ab3a5c3e
+id: 9a3e7163-d277-4ab1-ba21-7a14bf437143
 title: "Introdução ao DDD (Domain-Driven Design)"
 summary: "Introdução aos principais conceitos do DDD"
 ---
