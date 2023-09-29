@@ -1,5 +1,5 @@
 ---
-id: 9969baf8-2ae0-4edc-ab51-3d144d241ee8
+id: 9a3e7201-268d-4ba8-aa9a-ca35fea91451
 title: "O que é o \"Modelo\" do Domínio?"
 summary: "Resumo da parte \"Colocando o Modelo de Domínios em Ação\" do livro azul"
 ---
