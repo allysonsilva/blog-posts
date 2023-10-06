@@ -1,0 +1,41 @@
+---
+id: 9a4e3cdf-8309-4889-a063-5c158b84deba
+title: Ligando o Modelo à Implementação
+summary: "Veja os principais conceitos e como ligar, fazer a associação entre o modelo com a implementação"
+---
+
+Os modelos se apresentam de várias formas e desempenham vários papéis, até mesmo aqueles restritos ao contexto de um projeto de desenvolvimento de software. O *domain-driven design*, exige um modelo que não só auxilie a análise inicial, mas que seja a verdadeira base do design. Essa maneira de pensar traz algumas implicações importantes para o código. O que é menos óbvio é que o DDD exige uma abordagem diferente quanto à modelagem. [Evans, p. 42]
+
+*O astrolábio, utilizado para calcular as posições dos astros, é uma implementação mecânica de um modelo do céu.* [Evans, p. 43]
+
+Projetos que não têm nenhum modelo de domínio, mas simplesmente escrevem códigos para preencher uma função após a outra, aproveitam muito pouco da assimilação de conhecimento e da comunicação discutidas nos artigos anteriores. Um domínio complexo simplesmente os massacra. [Evans, p. 43]
+
+Por outro lado, muitos projetos complexos tentam encontrar algum tipo de modelo de domínio, mas não mantêm uma ligação forte entre o modelo e o código. O modelo que eles desenvolvem, possivelmente útil como ferramenta de exploração no início, torna-se cada vez mais irrelevante e até mesmo enganoso. Todo o cuidado dedicado ao modelo proporciona pouquíssima segurança de que o design esteja correto, pois os dois são diferentes. [Evans, p. 43]
+
+Seja qual for a causa, um software desprovido de um conceito na base de seu design é, na melhor das hipóteses, um mecanismo que realiza coisas úteis sem explicar suas ações. [Evans, p. 43]
+
+**Se o design, ou alguma parte fundamental dele, não é mapeado para o modelo do domínio, esse modelo tem pouco valor, e a exatidão do software é suspeita. Ao mesmo tempo, mapeamentos complexos entre modelos e funções do design são difíceis de entender e, na prática, impossíveis de manter à medida que o design sofre mudanças. Abre-se uma divisão mortal entre a análise e o design, de forma que o entendimento adquirido em cada uma dessas atividades não contribui para a outra.** [Evans, p. 43]
+
+Uma análise deve captar conceitos fundamentais do domínio de forma abrangente e expressiva. O design deve especificar um conjunto de componentes que possa ser construído com as ferramentas de programação em uso no projeto que possam funcionar com eficiência no ambiente-alvo e que possam resolver corretamente os problemas impostos com relação ao aplicativo. [Evans, p. 44]
+
+Sempre existem várias maneiras de abstrair um domínio, e sempre existem vários designs que podem resolver um problema do aplicativo. Isso é o que torna prático ligar o modelo e o design. Esta ligação não deve acontecer à custa de uma análise enfraquecida, fatalmente comprometida por considerações técnicas. Nem podemos aceitar design malfeitos, refletindo ideias do domínio, mas fugindo aos princípios de design de um software. Essa abordagem existe um modelo que funcione bem tanto como análise quando como design. Quando um modelo não parece ser prático para implementação, devemos procurar um novo. Quando um modelo não expressa filmente os conceitos fundamentais do domínio, devemos procurar um novo. O processo de modelagem e de design torna-se então um único ciclo interativo. [Evans, p. 45]
+
+**Logo: Faça o design de uma parte do sistema de software de forma a refletir o modelo do domínio de maneira bastante literal para que o mapeamento seja óbvio. Revise o modelo e modifique-o para que ele seja implementado de forma mais natural no software, mesmo que você procure fazer com que ele reflita um entendimento mais profundo no domínio. Exija um único modelo que atendam as duas finalidades muito bem, além de aceitar uma LINGUAGEM ONIPRESENTE robusta.** [Evans, p. 45]
+
+**Retire do modelo a terminologia utilizada no design e a atribuição básica de responsabilidades. O código torna-se uma expressão do modelo e, portanto, uma mudança no código pode ser uma mudança no modelo. Seu efeito deve se propagar devidamente pelo resto das atividades do projeto.** [Evans, p. 45]
+
+**Para amarrar a implementação finalmente a um modelo, são geralmente necessárias linguagens e ferramentas de desenvolvimento de software que aceitem um paradigma de modelagem, tal como a programação orientada a objetos.**[Evans, p. 45]
+
+Às vezes, haverá modelos diferentes para subsistemas diferentes, mas somente o modelo deve se aplicar a uma determinada parte do sistema no decorrer de todos os aspectos da tentativa de desenvolvimento, desde o código até a análise dos requisitos. [Evans, p. 45]
+
+O modelo único reduz as chances de error, pois o design é agora uma consequência direto do modelo cuidadosamente considerado. O design, e até mesmo o próprio código, contam com a comunicação típica de um modelo. [Evans, p. 46]
+
+É mais fácil dizer que se deve desenvolver um único modelo que capte o problema e gere um design prático do que fazê-lo. Não se pode simplesmente pegar um modelo e transformá-lo em um design funcional. O modelo precisa ser cuidadosamente elaborado para proporcionar uma implementação prática. Técnicas de design e implementação devem ser empregadas permitindo que o código expresse o modelo com eficiência. Quem digere o conhecimento explora opções de modelos refinando-as e transformando-as em elementos práticos do software. O desenvolvimento se torna um processo iterativo de refinamento do modelo, do design e do código como uma única atividade. [Evans, p. 47]
+
+**Se as pessoas que escrevem o código não se sentem responsáveis pelo modelo, ou não compreendem como fazer com que o modelo funcione para um aplicativo, o modelo não tem nada a ver com o software. Se os desenvolvedores não percebem que ao alterar o código, o modelo também é alterado, sua refatoração vai enfraquecer o modelo em vez de fortalecê-lo. Ao mesmo tempo, quando um modelador é separado do processo de implementação, ele nunca adquire, ou rapidamente perde, a noção das restrições de implementação. A restrição básica do DESIGN DIRIGIDO POR MODELOS - de que o modelo suporta uma implementação eficaz e abstrai o conhecimento principal do domínio - se perde, e os modelos resultantes não terão praticidade. Finalmente, o conhecimento e a capacidade de designers experientes não serão transferidos para outros desenvolvedores se a divisão de trabalho impedir o tipo de colaboração que transmite as sutilezas da codificação de um DESIGN DIRIGIDO POR MODELOS.** [Evans, p. 56]
+
+A eficácia de um design geral é bastante sensível à qualidade e à consistência das decisões apuradas de design e implementação. No caso de um DESIGN DIRIGIDO POR MODELOS, parte do código é uma expressão do modelo; ao alterar o código, o modelo é alterado. Os programadores são modeladores, mesmo que isso não agrade a todos. Portanto, é melhor elaborar o projeto de forma que os programadores façam um bom trabalho de modelagem. [Evans, p. 56]
+
+**Logo: Qualquer pessoa técnica que contribua para o modelo deve passar algum tempo tocando o código, independente da função principal que ele ou ela tenha no projeto. Qualquer pessoa responsável por alterar o código deve aprender a expressar o modelo através do código. Qualquer desenvolvedor deve se envolver, de alguma forma, nas discussões sobre o modelo e ter contato com os especialistas do domínio. Aqueles que contribuem de diversas maneiras devem conscientemente engajar aqueles que tocam o código em uma troca dinâmica de ideia sobre o modelo através da LINGUAGEM ONIPRESENTE.** [Evans, p. 56]
+
+O DDD coloca um modelo em funcionamento para resolver os problemas de um aplicativo. Através da assimilação do conhecimento, uma equipe destila uma enxurrada de informações caóticas transformando-as em um modelo prático. Um DESIGN DIRIGIDO POR MODELOS liga intimamente o modelo e a implementação. A LINGUAGEM ONIPRESENTE é o canal através do qual toda essa informação flui entre desenvolvedores, especialistas do domínio e o software. O resultado é um software que oferece uma excelente funcionalidade com base no entendimento fundamental do domínio principal. Conforme mencionado, o sucesso obtido com o DESIGN DIRIGIDO POR MODELOS é sensível a decisões detalhadas sobre o design. [Evans, p. 57]
