@@ -1,5 +1,5 @@
 ---
-id: 9a4e3cdf-8309-4889-a063-5c158b84deba
+id: 9a4e584f-d4a1-4b24-9816-5eccddaa35e1
 title: Ligando o Modelo à Implementação
 summary: "Veja os principais conceitos e como ligar, fazer a associação entre o modelo com a implementação"
 ---
