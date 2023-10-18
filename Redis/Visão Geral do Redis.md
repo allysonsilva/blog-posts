@@ -4,12 +4,6 @@ title: Visão Geral do Redis
 summary: "Visão geral dos conceitos básicos do Redis"
 ---
 
-<!-- DEBUG POPULATE 1000000 -->
-<!-- DBSIZE -->
-<!-- INFO memory -->
-<!-- INFO cpu -->
-<!-- MONITOR -->
-
 | **Structure type**  | **What it contains**                                                           | **Structure read/write ability**                                                                                           |
 |---------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | `STRING`            | *Strings, integers, or floating point values*                                  | Operate on the whole string, parts, increment/decrement the integers and floats.                                           |
