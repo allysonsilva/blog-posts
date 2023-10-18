@@ -1,5 +1,5 @@
 ---
-id: 9a4e3cdf-8309-4889-a063-5c158b84deba
+id: 9a66e0cf-02e5-4596-90b0-3df0bb6f6928
 title: Visão Geral do Redis
 summary: "Visão geral dos conceitos básicos do Redis"
 ---
