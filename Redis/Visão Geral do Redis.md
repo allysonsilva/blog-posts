@@ -1,7 +1,7 @@
 ---
 id: 9a66e0cf-02e5-4596-90b0-3df0bb6f6928
 title: Visão Geral do Redis
-summary: "Visão geral dos conceitos básicos do Redis"
+summary: "Visão geral dos conceitos básicos do Redis."
 ---
 
 | **Structure type**  | **What it contains**                                                           | **Structure read/write ability**                                                                                           |
