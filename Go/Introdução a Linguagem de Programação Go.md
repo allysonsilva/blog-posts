@@ -1,6 +1,6 @@
 ---
 id: 9be69c3a-55ce-48b6-b4e7-e078ba73c173
-title: Introdução a Linguagem de Programação Go
+title: Introdução à Linguagem de Programação Go
 summary: "Introdução à manipulação de variáveis, manipulação dos tipos primitivos e um pouco de tipos de valor e referência (ponteiro) em Go."
 ---
 
