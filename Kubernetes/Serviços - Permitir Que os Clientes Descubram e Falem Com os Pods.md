@@ -1,5 +1,5 @@
 ---
-id: 9c456d18-413f-4307-87d7-87bbbb175486
+id: 9c45b619-b13f-441b-8fec-a6bc587d4cd2
 title: Serviços - Permitir Que os Clientes Descubram e Falem Com os Pods
 summary: "Um Service no Kubernetes é um recurso que você cria para ter um ponto de entrada único para um grupo de Pods que fornecem o mesmo serviço"
 ---
