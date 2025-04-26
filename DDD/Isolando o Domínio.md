@@ -4,8 +4,6 @@ title: Isolando o Domínio
 summary: "A camada do domínio no DDD é onde se encontra as regras do negócio, que resolve e trata dos problemas e soluções do negócio"
 ---
 
-// force commit
-
 <img src="{{ mix('/images/articles/DDD/DDD-layered-achitecture.png') }}" alt="DDD Layered Architecture">
 
 - Precisamos desacoplar os objetos de domínio de outras funções do sistema para evitarmos confundir os conceitos do domínio com outros conceitos relacionados somente à tecnologia do software ou perder de vista o domínio como um todo na massa formada pelo sistema. [Evans, p. 63]
