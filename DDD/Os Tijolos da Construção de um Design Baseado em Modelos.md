@@ -6,7 +6,7 @@ summary: "Resumo da parte II (as partes técnicas do DDD) do livro azul"
 
 O diagrama apresentado abaixo é um *mapa de navegação*. Ele mostra os padrões que serão apresentados nesta seção e algumas maneiras em que eles estão relacionados uns aos outros.
 
-![A navigation map of the language of domain-driven design](/images/articles/DDD/a-navigation-map-of-the-language-of-domain-driven-design.png?id=d384824430e8de92edf4460b1769b67d)
+<img src="{{ mix('/images/articles/DDD/a-navigation-map-of-the-language-of-domain-driven-design.png') }}" alt="A navigation map of the language of domain-driven design">
 
 - Certos tipos de decisões mantêm o modelo e a implementação alinhados entre si, cada um reforçando a eficácia do outro. Esse alinhamento requer atenção aos detalhes de cada elemento. A criação cuidadosa nessa escala pequena dá aos desenvolvedores uma plataforma sólida a partir da qual eles podem aplicar abordagens de modelagem e design. [Evans, p. 60]
 

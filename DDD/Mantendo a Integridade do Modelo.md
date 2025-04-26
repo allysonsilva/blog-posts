@@ -4,7 +4,7 @@ title: Mantendo a Integridade do Modelo
 summary: "Um modelo bem-sucedido, seja ele pequeno ou grande, deve ser logicamente consistente do início ao fim, sem definições contraditórias ou sobrepostas"
 ---
 
-![A navigation map for model integrity patterns](/images/articles/DDD/a-navigation-map-for-model-integrity-patterns.png?id=b0b3dd675ab8d0eab4d6a9e8fb4ea622)
+<img src="{{ mix('/images/articles/DDD/a-navigation-map-for-model-integrity-patterns.png') }}" alt="A navigation map for model integrity patterns">
 
 (...) o requisito mais fundamental de um modelo é que ele seja internamente consistente; que seus termos sempre tenham o mesmo significado e que ele não contenha nenhuma regra contraditória. A consistência interna de um modelo, de forma que cada termo não gere dúvidas e nenhuma regra seja contraditória, é chamada de *unificação*. Um modelo não tem significado a não ser que seja logicamente consistente. [Evans, p. 318]
 
@@ -16,7 +16,7 @@ Um CONTEXTO DELIMITADO é um limite conceitual em que um modelo de domínio é a
 
 Um CONTEXTO DELIMITADO é um limite explicito dentro do qual um modelo de domínio existe. O modelo de domínio expressa uma linguagem ubíqua como um modelo de software. *O limite é criado porque cada um dos conceitos dentro do modelo, com suas propriedades e operações, tem um significado especial.*
 
-![Cells can exist because their membranes define what is in and out and determine what can pass](/images/articles/DDD/cells-can-exist-because-their-membranes-define-what-is-in-and-out-and-determine-what-can-pass.png?id=13d231ca4721e1710f5f76dcfa002e34)
+<img src="{{ mix('/images/articles/DDD/cells-can-exist-because-their-membranes-define-what-is-in-and-out-and-determine-what-can-pass.png') }}" alt="Cells can exist because their membranes define what is in and out and determine what can pass">
 
 Um modelo se aplica a um contexto. O contexto pode ser uma determinada parte do código, ou o trabalho de uma determinada equipe. (...) O contexto do modelo é qualquer conjunto de condições que deve se aplicar para que se possa dizer que os termos de um modelo possuem um significado específico. [Evans, p. 322]
 
@@ -34,7 +34,7 @@ Os limites são lugares especiais. As relações entre um CONTEXTO DELIMITADO e 
 
 - Além de lhe dar um inventário dos sistemas com os quais o contexto / parte deve interagir, um MAPA DE CONTEXTO serve como um catalisador para a comunicação inter-equipe.
 
-![A simple context map that lists translations such as false cognates and duplicate concepts between two theoretical models in their bounded contexts](/images/articles/DDD/a-simple-context-map-that-lists-translations-such-as-false-cognates-and-duplicate-concepts-between-two-theoretical-models-in-their-bounded-contexts.jpg?id=b9f4b6ae0cd941add572a188f195eeaa)
+<img src="{{ mix('/images/articles/DDD/a-simple-context-map-that-lists-translations-such-as-false-cognates-and-duplicate-concepts-between-two-theoretical-models-in-their-bounded-contexts.jpg') }}" alt="A simple context map that lists translations such as false cognates and duplicate concepts between two theoretical models in their bounded contexts">
 
 Um MAPA DE CONTEXTO não é uma Arquitetura Corporativa ou diagrama da topologia do sistema. As informações são transmitidas em relação aos modelos de interação e padrões DDD organizacionais. Contudo, Mapas de Contexto podem ser usados em investigações arquitetônicas de alto nível, fornecendo pontos de vista da empresa de outro modo não disponível. Eles podem detectar deficiências arquitetônicas como gargalos de interação. Como eles exibem uma dinâmica organizacional, Mapas de Contexto podem até mesmo ajudar a identificar as difíceis questões de governança que poderiam bloquear o progresso, e outros desafios da equipe e gerência que são mais difíceis de revelar utilizando outros métodos.
 
