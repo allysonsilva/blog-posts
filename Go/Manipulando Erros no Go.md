@@ -747,7 +747,7 @@ Um exemplo que examinaremos posteriormente é tentar acessar um índice de uma c
 
 É assim que *`panic`* funciona:
 
-![The working of panic](/images/articles/Go/The%20working%20of%20panic.png?id=26dfc239f196da05fddf6f8b3310bfee "The working of panic")
+<img src="{{ mix('/images/articles/Go/The working of panic.png') }}" alt="The working of panic">
 
 O diagrama anterior ilustra o código da função `main` que chama a função `a()`. A função `a()` então chama a função `b()`. Dentro da função `b()`, ocorre um *`panic`*. A função `panic()` não é controlada por nenhum código anterior (função `a()` ou a função `main()`), então o programa irá travar a função `main()`.
 
@@ -911,7 +911,7 @@ A função `recover()` só é útil dentro de uma função adiada (*deferred*). 
 
 O diagrama a seguir mostra as etapas que um programa executaria ao usar `panic()`, `recover()` e uma função `defer()`:
 
-![Recover function flow](/images/articles/Go/Recover%20function%20flow.png?id=c6814d30e771df8bbed67816a7db8724 "Recover function flow")
+<img src="{{ mix('/images/articles/Go/Recover function flow.png') }}" alt="Recover function flow">
 
 As etapas seguidas no diagrama podem ser explicadas da seguinte forma:
 

@@ -19,7 +19,7 @@ As funções em *Go* são consideradas cidadãos de primeira classe (**first-cla
 
 Veremos os diferentes componentes envolvidos na **definição de uma função**. A seguir está o layout típico de uma função:
 
-![Different parts of a function](/images/articles/Go/Different%20parts%20of%20a%20function.png?id=6ffb8f8d0f616ef10fde1762f7317f8b "Different parts of a function")
+<img src="{{ mix('/images/articles/Go/Different parts of a function.png') }}" alt="Different parts of a function">
 
 As diferentes partes de uma função são:
 
@@ -174,7 +174,7 @@ Jonh
 
 O tipo real de `Type` dentro da função é uma *`slice`*. A função pega os argumentos que estão sendo passados ​​e os converte em uma *`slice`*. Por exemplo, se o tipo de variável for `int`, uma vez que você estiver dentro da função, *Go* converterá essa variável `int` em uma *`slice`* de números inteiros:
 
-![Conversion of a variadic int into a slice of integers](/images/articles/Go/Conversion%20of%20a%20variadic%20int%20into%20a%20slice%20of%20integers.png?id=29d5f96e343d6ce060db610e6bb54601 "Conversion of a variadic int into a slice of integers")
+<img src="{{ mix('/images/articles/Go/Conversion of a variadic int into a slice of integers.png') }}" alt="Conversion of a variadic int into a slice of integers">
 
 
 ```go
@@ -404,7 +404,7 @@ Na função principal, chamamos `calculator(add, 5, 6)`. Estamos passando a fun�
 
 A imagem abaixo resume cada uma das funções anteriores e como elas se relacionam entre si. A imagem mostra como `func add` é do tipo `func calc`, que então permite que seja passado como um argumento para `func calculator`:
 
-![Function types and uses](/images/articles/Go/Function%20types%20and%20uses.png?id=1c2094d9a5ac17f9f2368233afd4e3b3 "Function types and uses")
+<img src="{{ mix('/images/articles/Go/Function types and uses.png') }}" alt="Function types and uses">
 
 Acabamos de ver como criar um tipo de função e passá-lo como um argumento para outra função. Não é muito difícil passar uma função como parâmetro para outra função. Vamos mudar nosso exemplo anterior ligeiramente para refletir a passagem de uma função como um parâmetro:
 

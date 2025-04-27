@@ -466,7 +466,7 @@ Inner: 20
 
 Esses comportamentos são chamados de *methods sets*. Um comportamento é definido por um conjunto de métodos. Um *method set* é um grupo de métodos. Esses *method sets* incluem o nome do método, quaisquer parâmetros de entrada e quaisquer tipos de retorno.
 
-![Graphic representation of interface elements](/images/articles/Go/Graphic%20representation%20of%20interface%20elements.png?id=4eae142e46ff891dee07952e8b8b94b6 "Graphic representation of interface elements")
+<img src="{{ mix('/images/articles/Go/Graphic representation of interface elements.png') }}" alt="Graphic representation of interface elements">
 
 Quando falamos sobre *comportamentos*, observe que não discutimos os *detalhes de implementação*. Os *detalhes de implementação* são omitidos ao definir uma interface. **É importante entender que nenhuma implementação é especificada ou imposta na declaração de uma interface**. Cada tipo que criamos que implementa uma interface pode ter seus próprios *detalhes de implementação*. Uma interface que possui um método chamado `Greeting()` pode ser implementada de diferentes maneiras por vários tipos. Um tipo de estrutura de pessoa pode implementar `Greeting()` de uma maneira diferente de um tipo da estrutura de animal. **As interfaces se concentram nos comportamentos que o tipo deve exibir/ter**. Não é função da interface fornecer método/como implementar. Esse é o trabalho do tipo que está implementando a interface. **Os tipos, geralmente uma estrutura, contêm os *detalhes de implementação* dos conjuntos de métodos**. Agora que temos um entendimento básico de uma interface, no próximo tópico, veremos como definir uma interface.
 
@@ -474,7 +474,7 @@ Quando falamos sobre *comportamentos*, observe que não discutimos os *detalhes 
 
 Definir uma interface envolve as seguintes etapas:
 
-![Defining an interface](/images/articles/Go/Defining%20an%20interface.png?id=5142ee12a6c61d4c93ba2f4415fe4a7e "Defining an interface")
+<img src="{{ mix('/images/articles/Go/Defining an interface.png') }}" alt="Defining an interface">
 
 Aqui está um exemplo de declaração de uma interface:
 
@@ -910,7 +910,7 @@ Como uma instância de *interface* com um tipo não `nil` não é igual a `nil`,
 
 Polimorfismo é a capacidade parecer-se de várias formas. Por exemplo, um `shape` pode parecer como um `square`, `circle`, `rectangle` ou qualquer outra forma:
 
-![Polymorphism example for shape](/images/articles/Go/Polymorphism%20example%20for%20shape.png?id=c2525d441c9d1728ae9a15b653bb179b "Polymorphism example for shape")
+<img src="{{ mix('/images/articles/Go/Polymorphism example for shape.png') }}" alt="Polymorphism example for shape">
 
 *Go* não tem subclasses / herança como outras linguagens orientadas a objetos, porque *Go não tem classes*. A criação de subclasses na programação orientada a objetos é herdar de uma classe para outra. Ao fazer subclasses, você está herdando os campos e métodos de outra classe. *Go* oferece um comportamento semelhante por meio da **embedding** (*incorporação*) de *`structs`* e usando polimorfismo por meio de *interfaces*.
 
@@ -918,7 +918,7 @@ Polimorfismo é a capacidade parecer-se de várias formas. Por exemplo, um `shap
 
 Como vimos nos exemplos anteriores, **cada tipo concreto pode implementar uma ou mais interfaces**. A interface de `Speaker{}` pode ser implementada por tipos de `dog`, `cat` ou `fish` conforme a imagem abaixo:
 
-![The Speaker interface implemented by multiple types](/images/articles/Go/The%20Speaker%20interface%20implemented%20by%20multiple%20types.png?id=7ffb8169c60f8a5246d732970c1586ff "The Speaker interface implemented by multiple types")
+<img src="{{ mix('/images/articles/Go/The Speaker interface implemented by multiple types.png') }}" alt="The Speaker interface implemented by multiple types">
 
 **Quando uma função aceita uma interface como parâmetro, qualquer tipo concreto que implemente essa interface pode ser passado como argumento**. Agora, você atingiu o polimorfismo ao ser capaz de passar vários tipos concretos para um método ou função que tem um tipo de interface como parâmetro.
 
@@ -991,7 +991,7 @@ func (s square) Name() string {
 }
 ```
 
-![Square, triangle, rectangle area of the Shape type](/images/articles/Go/Square,%20triangle,%20rectangle%20area%20of%20the%20Shape%20type.png?id=6bca60c2c4e353b69be4b6ab96163778 "Square, triangle, rectangle area of the Shape type")
+<img src="{{ mix('/images/articles/Go/Square, triangle, rectangle area of the Shape type.png') }}" alt="Square, triangle, rectangle area of the Shape type">
 
 Executando o código deverá ver o seguinte resultado:
 
@@ -1107,7 +1107,7 @@ func main() {
 
 Passamos um tipo `cat`, `int`, `bool` e `string`. A função `emptyDetails()` imprimirá cada um deles:
 
-![The type cat implements an empty interface and the Speaker interface](/images/articles/Go/The%20type%20cat%20implements%20an%20empty%20interface%20and%20the%20Speaker%20interface.png?id=e9f86250a11a6f3ee68060a15151d9c5 "The type cat implements an empty interface and the Speaker interface")
+<img src="{{ mix('/images/articles/Go/The type cat implements an empty interface and the Speaker interface.png') }}" alt="The type cat implements an empty interface and the Speaker interface">
 
 *O tipo `cat` implementa a interface vazia `interface{}` e a interface `Speaker{}` implicitamente*.
 
@@ -1199,7 +1199,7 @@ v := s.(T)
 
 A instrução anterior diz que o valor da interface `s` é do tipo `T` e atribui o valor subjacente a `v`:
 
-![Type assertion flow](/images/articles/Go/Type%20assertion%20flow.png?id=04567a7dadfb26a0c6b66d31e2f484ee "Type assertion flow")
+<img src="{{ mix('/images/articles/Go/Type assertion flow.png') }}" alt="Type assertion flow">
 
 A notação para **type assertion** é `<value>.(<type>)`. **Type assertion** resulta em um valor do tipo que foi solicitado e, opcionalmente, um `bool` se foi bem-sucedido ou não. Isto parece com `<value> := <value>.(<type>)` ou `<value>, <ok> := <value>.(type)`. Se você deixar o valor booleano (`<ok>`) de fora e **type assertion** falhar, *Go* causará pânico.
 
