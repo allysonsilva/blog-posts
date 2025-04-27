@@ -22,7 +22,7 @@ No _Redis_, `STRING`s são usadas ​​para armazenar três tipos de valores:
 
 > *Strings* são os tipos de dados mais versáteis no Redis porque têm muitos comandos e múltiplos propósitos. Uma *String* pode se comportar como um valor inteiro, float, string de texto ou bitmap com base em seu valor e nos comandos usados. Ele pode armazenar qualquer tipo de dados: texto (XML, JSON, HTML ou raw text), inteiros, flutuantes ou dados binários (vídeos, imagens ou arquivos de áudio). Um valor *String* não pode exceder 512 MB de texto ou dados binários.
 
-![An example of a STRING, world, stored under a key, hello](/images/articles/Redis/an-example-of-a-STRING-world-stored-under-a-key-hello.svg?id=38fde0aac922e7009494f50915fe4f16 "An example of a STRING, world, stored under a key, hello")
+<img src="{{ mix('/images/articles/Redis/an-example-of-a-STRING-world-stored-under-a-key-hello.svg') }}" alt="An example of a STRING, world, stored under a key, hello">
 
 Os tipos de string são os tipos de dados básicos no *Redis*. Embora na terminologia do Redis, string pode ser considerada uma matriz de bytes que pode conter strings, inteiros, imagens, arquivos e objetos serializáveis. Essas matrizes de bytes são *binary safe* por natureza e o tamanho máximo que podem conter é *512 MB*.
 
@@ -181,7 +181,7 @@ Os tipos de string são os tipos de dados básicos no *Redis*. Embora na termino
 
 > *LISTs* no Redis armazenam uma sequência ordenada de strings.
 
-![An example of a LIST with three items under the key, list-key. Note that item can be in the list more than once](/images/articles/Redis/an-example-of-a-LIST-with-three-items-under-the-key-list-key-Note-that-item-can-be-in-the-list-more-than-once.svg?id=668a408dcb4904fb60e112535889ee0d "An example of a LIST with three items under the key, list-key. Note that item can be in the list more than once")
+<img src="{{ mix('/images/articles/Redis/an-example-of-a-LIST-with-three-items-under-the-key-list-key-Note-that-item-can-be-in-the-list-more-than-once.svg') }}" alt="An example of a LIST with three items under the key, list-key. Note that item can be in the list more than once">
 
 As listas no *Redis* são um tipo de estrutura muito flexível, porque podem agir como uma *simples collection*, *stack* ou *fila*. O número máximo de elementos que uma lista pode conter é (*2^32 - 1*), o que significa que pode haver **mais de 4 bilhões de elementos _por lista_**.
 
@@ -333,7 +333,7 @@ Os comandos no Redis para as listas normalmente começam com a letra `L`. Isso t
 
 > Um **Set** no Redis são estruturas de dados que são uma coleção/conjunto não ordenada de strings distintas - não é possível adicionar elementos repetidos/duplicados a um *Set*. Internamente, um **Set** é implementado como uma tabela hash, razão pela qual algumas operações são otimizadas: adição de membros, remoção e execução de pesquisa em `O(1)`, tempo constante. Um dos aspectos interessantes em termos de desempenho dos *Sets* é que eles mostram um tempo constante para adicionar, remover e verificar a existência de um elemento.
 
-![An example of a SET with three items under the key, set-key](/images/articles/Redis/an-example-of-a-SET-with-three-items-under-the-key-set-key.svg?id=d67375c8d3e9768a78580ab3a981ffdf "An example of a SET with three items under the key, set-key")
+<img src="{{ mix('/images/articles/Redis/an-example-of-a-SET-with-three-items-under-the-key-set-key.svg') }}" alt="An example of a SET with three items under the key, set-key">
 
 O número máximo de elementos que um *Set* pode conter é (*2^32 - 1*), o que significa que pode haver mais de 4 bilhões de elementos por *Set*.
 
@@ -460,7 +460,7 @@ Os comandos no Redis para os **Sets** podem ser categorizados nas seguintes part
 
 > Como os tipos de `HASH`, os `ZSET`s também contêm um tipo de chave e valor. As chaves (chamadas de *members*) são únicas/exclusivas e os valores (chamados de *scores*) são limitados a números de ponto flutuante. `ZSET`s têm a propriedade única no Redis de poder ser acessado por um membro (como um `HASH`), mas os itens também podem ser acessados ​​pela ordem de classificação e pelos valores das pontuações.
 
-![An example of a ZSET with two members:scores under the key zset-key](/images/articles/Redis/an-example-of-a-ZSET-with-two-members-scores-under-the-key-zset-key.svg?id=c6f507c3b6373e95f13d1bc8879c0bd3 "An example of a ZSET with two members:scores under the key zset-key")
+<img src="{{ mix('/images/articles/Redis/an-example-of-a-ZSET-with-two-members-scores-under-the-key-zset-key.svg') }}" alt="An example of a ZSET with two members:scores under the key zset-key">
 
 Um **Sorted Set** é muito semelhante a um *Set*, mas cada elemento de um **Sorted Set** tem uma pontuação associada. Em outras palavras, um **Sorted Set** é uma coleção de strings não repetidas classificadas por uma pontuação. É possível ter elementos com pontuações repetidas. Nesse caso, os elementos repetidos são ordenados lexicograficamente (em ordem alfabética).
 
@@ -471,7 +471,7 @@ As operações em *Sorted Set* são rápidas, mas não tão rápidas quanto as o
 
 Os *Sorted Sets* são muito parecidos com os *Sets* do Redis, pois não armazenam valores duplicados, mas a área em que eles diferem dos *Sets* é que os valores são classificados com base em uma pontuação, ou inteiros, valores flutuantes. Esses valores são fornecidos ao definir um valor no Conjunto. O desempenho desses *Sorted Sets* é proporcional ao logaritmo do número de elementos. Os dados são sempre mantidos de forma ordenada. Esse conceito é explicado na imagem abaixo:
 
-![The concept of Sorted Sets](/images/articles/Redis/the-concept-of-sorted-sets.png?id=5994331d8395a470d61fdb414c71cab0 "The concept of Sorted Sets")
+<img src="{{ mix('/images/articles/Redis/the-concept-of-sorted-sets.png') }}" alt="The concept of Sorted Sets">
 
 Os comandos no Redis para os **Sorted Sets** podem ser categorizados nas seguintes partes:
 
@@ -773,7 +773,7 @@ Os comandos no Redis para os **Sorted Sets** podem ser categorizados nas seguint
 
 > Enquanto `LIST` e `SET` no Redis contêm uma sequências de elementos, os `HASH`es no Redis armazenam um mapeamento de chave-valor. Os valores que podem ser armazenados em `HASH` são os mesmos que podem ser armazenados como `STRING`: strings themselves, ou se um valor pode ser interpretado como um número, esse valor pode ser manipulado com comandos de números.
 
-![An example of a HASH with two keys:values under the key hash-key](/images/articles/Redis/an-example-of-a-HASH-with-two-keys-values-under-the-key-hash-key.svg?id=805819274e0ba2c079ab52193e1153ad "An example of a HASH with two keys:values under the key hash-key")
+<img src="{{ mix('/images/articles/Redis/an-example-of-a-HASH-with-two-keys-values-under-the-key-hash-key.svg') }}" alt="An example of a HASH with two keys:values under the key hash-key">
 
 Hashes são ótimas estruturas de dados para armazenar objetos que você pode mapear uma chave para um valor. Eles são otimizados para usar a memória com eficiência e procurar dados muito rapidamente. Em um Hash, tanto o nome do campo quanto o valor são *Strings*. Portanto, um Hash é um mapeamento de uma *String* para uma *String*.
 
@@ -896,7 +896,7 @@ Os *Bitmaps* são eficientes em termos de memória, suportam pesquisas rápidas 
 
 Veja este exemplo do Bitmap com três bits ativados e dois desativados:
 
-![A Bitmap with one Set on offsets 0, 3, and 4 and zero Set on offsets 1 and 2](/images/articles/Redis/a-Bitmap-with-one-Set-on-offsets-0-3-and-4-and-zero-Set-on-offsets-1-and-2.png?id=371567afb3df29b69c6378c764420d0e "A Bitmap with one Set on offsets 0, 3, and 4 and zero Set on offsets 1 and 2")
+<img src="{{ mix('/images/articles/Redis/a-Bitmap-with-one-Set-on-offsets-0-3-and-4-and-zero-Set-on-offsets-1-and-2.png') }}" alt="A Bitmap with one Set on offsets 0, 3, and 4 and zero Set on offsets 1 and 2">
 
 Para ver como um Bitmap pode ser eficiente em termos de memória, vamos comparar um Bitmap a um Set. O cenário de comparação é um aplicativo que precisa armazenar todos os IDs de usuário que visitaram um site em um determinado dia (o offset do Bitmap representa um ID de usuário). Presumimos que nosso aplicativo tenha 5 milhões de usuários no total, mas apenas 2 milhões de usuários visitaram o site naquele dia, e que cada ID de usuário pode ser representado por 4 bytes (32 bits, que é o tamanho de um número inteiro em um computador de 32-bit).
 
@@ -909,7 +909,7 @@ A tabela a seguir compara quanta memória um Bitmap e uma implementação de Set
 
 Os Bitmaps são tipos especiais de estrutura de dados com espaço eficiente, usados para armazenar tipos especiais de informações. Os Bitmaps são usados especialmente para trabalho de análise em tempo real. Embora o Bitmap só possa armazenar valores em binário (`1` ou `0`), o fato de que eles consomem menos espaço e o desempenho para obter um valor é `O(1)`, os torna muito atraentes para análises em tempo real:
 
-![Representation of Bitmap](/images/articles/Redis/representation-of-bitmap.png?id=57b7394185e81aca86df1be40e76d290 "Representation of Bitmap")
+<img src="{{ mix('/images/articles/Redis/representation-of-bitmap.png') }}" alt="Representation of Bitmap">
 
 ### Manipulando
 
