@@ -451,7 +451,7 @@ A propriedade **`headers`** é uma tabela de chave-valor que permite chaves e va
 
 Ao contrário das outras propriedades, a propriedade **`headers`** permite que você adicione quaisquer dados que desejar à tabela de cabeçalhos.
 
-<img src="{{ mix('/images/articles/RabbitMQ/The headers property allows for arbitrary key/value pairs in the message properties.png') }}" alt="The headers property allows for arbitrary key/value pairs in the message properties">
+<img src="{{ mix('/images/articles/RabbitMQ/The headers property allows for arbitrary key:value pairs in the message properties.png') }}" alt="The headers property allows for arbitrary key/value pairs in the message properties">
 
 ### Resumo
 
