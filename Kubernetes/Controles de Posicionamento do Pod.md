@@ -55,7 +55,7 @@ Embora o *Kubernetes* já forneça alta disponibilidade, permitindo que você ag
 
 Por enquanto, vamos conceituar um caso em que temos nosso cluster em bare metal com 20 nós por rack físico. Se cada rack tiver sua própria conexão de energia dedicada e backup, ele pode ser pensado como um domínio de falha. Quando as conexões de energia falham, todas as máquinas no rack falham. Assim, podemos querer incentivar o *Kubernetes* a executar duas instâncias ou *`Pods`* em racks/domínios de falha separados. A imagem a seguir mostra como um aplicativo pode ser executado em domínios de falha:
 
-![Failure domains](/images/articles/Kubernetes/Failure%20domains.png?id=84654b69a43854aa178eead285c0bbf9 "Failure domains")
+<img src="{{ mix('/images/articles/Kubernetes/Failure domains.png') }}" alt="Failure domains">
 
 Como você pode ver na imagem acima, como os *`Pods`* do aplicativo estão espalhados por vários domínios de falha, não apenas vários nós no mesmo domínio de falha, podemos manter o tempo de atividade mesmo que o Domínio de Falha 1 diminua. O aplicativo `A - Pod 1` e o aplicativo `B - Pod 1` estão no mesmo domínio de falha (vermelho). No entanto, se esse domínio de falha (`Rack 1`) cair, ainda teremos uma réplica de cada aplicativo no `Rack 2`.
 

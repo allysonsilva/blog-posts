@@ -14,7 +14,7 @@ Em segundo lugar, existem `Deployments`, que controlam um `ReplicaSet`. Os `Depl
 
 O comportamento real de um controlador, deve ser fácil de prever. Uma visão simplificada do loop de controle padrão se parece com o seguinte diagrama:
 
-![A basic control loop for a Kubernetes controller](/images/articles/Kubernetes/A%20basic%20control%20loop%20for%20a%20Kubernetes%20controller.png?id=fadcdbb2a9f0e7d488d695c8883cfdec "A basic control loop for a Kubernetes controller"))
+<img src="{{ mix('/images/articles/Kubernetes/A basic control loop for a Kubernetes controller.png') }}" alt="A basic control loop for a Kubernetes controller">)
 
 Na imagem acima, o controlador verifica constantemente o *estado pretendido do cluster* (sete *`Pods`* do aplicativo) em relação ao *estado atual do cluster* (cinco *`Pods`* do aplicativo em execução). Quando o *estado pretendido* não corresponde ao *estado atual*, o controlador agirá por meio da API para corrigir o *estado atual* para corresponder ao *estado pretendido*.
 
@@ -26,7 +26,7 @@ A imagem abaixo mostra o que acontece quando um nó falha e leva dois *`Pods`* c
 
 O *`ReplicaSet`* na imagem abaixo gerencia apenas um único *`Pod`*, mas os *`ReplicaSets`*, em geral, destinam-se a criar e gerenciar várias cópias (réplicas) de um modelo de *`Pod`*.
 
-![When a node fails, only pods backed by a ReplicaSet are recreated](/images/articles/Kubernetes/When%20a%20node%20fails,%20only%20pods%20backed%20by%20a%20ReplicaSet%20are%20recreated.png?id=7f543d04e59e9150efc5022e56095f12 "When a node fails, only pods backed by a ReplicaSet are recreated")
+<img src="{{ mix('/images/articles/Kubernetes/When a node fails, only pods backed by a ReplicaSet are recreated.png') }}" alt="When a node fails, only pods backed by a ReplicaSet are recreated">
 
 Um *`ReplicaSet`* monitora constantemente a lista de *`Pods`* em execução e **garante que o número real de *`Pods`* de um "tipo" sempre corresponda ao número desejado**. Se houver poucos *`Pods`* em execução, ele criará novas réplicas a partir de um modelo do *`Pod`*. Se muitos desses *`Pods`* estiverem em execução, ele removerá as réplicas em excesso.
 
@@ -163,7 +163,7 @@ Um *ReplicaSet* tem três partes essenciais (também mostradas na imagem abaixo)
 - *Uma contagem de réplicas, que especifica o número desejado de `Pods` que devem estar em execução;*
 - *Um modelo do `Pod`, que é template usado ao criar novas réplicas;*
 
-![The three key parts of a ReplicaSet -pod selector, replica count, and pod template-](/images/articles/Kubernetes/The%20three%20key%20parts%20of%20a%20ReplicaSet%20(pod%20selector,%20replica%20count,%20and%20pod%20template).png?id=ff52d554ed5df313af21c3b3ef619fdc "The three key parts of a ReplicaSet (pod selector, replica count, and pod template")
+<img src="{{ mix('/images/articles/Kubernetes/The three key parts of a ReplicaSet (pod selector, replica count, and pod template).png') }}" alt="The three key parts of a ReplicaSet (pod selector, replica count, and pod template)">
 
 ### Entendendo exatamente o que leva o controlador a criar um novo *Pod*
 
@@ -171,7 +171,7 @@ O controlador está respondendo à exclusão de um *`Pod`* criando um novo *`Pod
 
 Embora um *ReplicaSet* seja notificado imediatamente sobre a exclusão de um *`Pod`* (o *`API server`* permite que os clientes observem as alterações nos recursos e nas listas de recursos), não é isso que faz com que ele crie um *`Pod`* de substituição. A notificação aciona o controlador para verificar o número real de *`Pods`* e tomar as medidas adequadas.
 
-![If a pod disappears, the ReplicaSet sees too few pods and creates a new replacement pod](/images/articles/Kubernetes/If%20a%20pod%20disappears,%20the%20ReplicaSet%20sees%20too%20few%20pods%20and%20creates%20a%20new%20replacement%20pod.png?id=89298d36b82d757efde38d2db4bc8bb0 "If a pod disappears, the ReplicaSet sees too few pods and creates a new replacement pod")
+<img src="{{ mix('/images/articles/Kubernetes/If a pod disappears, the ReplicaSet sees too few pods and creates a new replacement pod.png') }}" alt="If a pod disappears, the ReplicaSet sees too few pods and creates a new replacement pod">
 
 ## *Deployments*: Atualizações de Aplicativos Declarativamente
 
@@ -181,7 +181,7 @@ Em alto nível, você começa com o código do aplicativo. Isso é empacotado em
 
 A imagem abaixo mostra alguns *`Pods`* sendo gerenciados por um controlador de *Deployment*.
 
-![Deployment theory](/images/articles/Kubernetes/Deployment%20theory.png?id=c3af1fe3b9ed278ae50b4a77753ccc9d "Deployment theory")
+<img src="{{ mix('/images/articles/Kubernetes/Deployment theory.png') }}" alt="Deployment theory">
 
 **É importante saber que um único objeto de *Deployment* pode gerenciar apenas um único modelo de Pod**. Por exemplo, se você tiver um aplicativo com um modelo de *`Pod`* para o front-end e outro modelo de *`Pod`* para um serviço back-end de produtos, você precisará de dois *Deployments*. No entanto, como você viu na imagem acima, uma *Deployment* pode gerenciar várias réplicas do mesmo *`Pod`*. Por exemplo, a imagem acima pode ser uma *Deployment* que atualmente gerencia duas réplicas *`Pods`* do servidor da web.
 
@@ -191,7 +191,7 @@ Uma coisa a ser observada é que, em background, os *Deployments* manipulam *Rep
 
 Na imagem abaixo mostra os mesmos *`Pods`* gerenciados pelo mesmo *Deployment*. No entanto, desta vez, adicionamos um objeto *ReplicaSet* ao relacionamento e vemos qual objeto é responsável por qual recurso.
 
-![Deployment theory with ReplicaSet](/images/articles/Kubernetes/Deployment%20theory%20with%20ReplicaSet.png?id=5359806fb37c595a452220ccd04c02c2 "Deployment theory with ReplicaSet")
+<img src="{{ mix('/images/articles/Kubernetes/Deployment theory with ReplicaSet.png') }}" alt="Deployment theory with ReplicaSet">
 
 Em resumo, pense em *Deployment* como gerenciador de *ReplicaSets* e *ReplicaSets* como gerenciador de *`Pods`*. Junte todos eles e você terá uma ótima maneira de implantar e gerenciar aplicativos no *Kubernetes*.
 
@@ -203,7 +203,7 @@ Um *`Deployment`* é um recurso *top-level* destinado a implantar aplicativos e 
 
 Quando você cria um *`Deployment`*, um recurso *`ReplicaSet`* é criado por baixo. Os *`ReplicaSets`* replicam e gerenciam os *`Pods`*. Ao usar *`Deployments`*, os *`Pods`* reais são criados e gerenciados pelos *`ReplicaSets`* do *`Deployment`*, não pelo *`Deployment`* diretamente (o relacionamento é mostrado na imagem abaixo).
 
-![A Deployment is backed by a ReplicaSet, which supervises the deployments pods](/images/articles/Kubernetes/A%20Deployment%20is%20backed%20by%20a%20ReplicaSet,%20which%20supervises%20the%20deployments%20pods.png?id=b519f69c2fce42df3ff561f0a8402aa3 "A Deployment is backed by a ReplicaSet, which supervises the deployments pods")
+<img src="{{ mix('/images/articles/Kubernetes/A Deployment is backed by a ReplicaSet, which supervises the deployments pods.png') }}" alt="A Deployment is backed by a ReplicaSet, which supervises the deployments pods">
 
 Usar um *`Deployment`* em vez de construções de nível inferior torna a atualização de um aplicativo muito mais fácil, porque você está definindo o estado desejado por meio de um único recurso de *`Deployment`* e deixando o *Kubernetes* cuidar do resto.
 
@@ -257,7 +257,7 @@ Agora, suponha que tenha um bug no aplicativo e precise implantar uma imagem atu
 
 A imagem abaixo mostra um *Deployment* que foi atualizada uma vez. O *Deployment* inicial criou o *ReplicaSet* à esquerda e a atualização criou o *ReplicaSet* à direita. Você pode ver que o *ReplicaSet* para o *Deployment* inicial foi encerrado e não tem mais réplicas do *`Pod`*. O *ReplicaSet* associado à atualização está ativo e possui todos os *`Pods`*.
 
-![Shows a Deployment that has been updated once](/images/articles/Kubernetes/Shows%20a%20Deployment%20that%20has%20been%20updated%20once.png?id=524a31424ae899dfaa9ffe4d43f758bf "Shows a Deployment that has been updated once")
+<img src="{{ mix('/images/articles/Kubernetes/Shows a Deployment that has been updated once.png') }}" alt="Shows a Deployment that has been updated once">
 
 É importante entender que o *ReplicaSet* antigo ainda tem sua configuração completa, incluindo a versão mais antiga da imagem que ele usava. Isso será importante no próximo tópico.
 
@@ -269,7 +269,7 @@ O processo de reversão é essencialmente o oposto de uma atualização contínu
 
 A imagem abaixo mostra o mesmo aplicativo revertido para a revisão inicial.
 
-![Shows the same app rolled back to the initial revision](/images/articles/Kubernetes/Shows%20the%20same%20app%20rolled%20back%20to%20the%20initial%20revision.png?id=bba9d18efd6e146d25746c991f8e8411 "Shows the same app rolled back to the initial revision")
+<img src="{{ mix('/images/articles/Kubernetes/Shows the same app rolled back to the initial revision.png') }}" alt="Shows the same app rolled back to the initial revision">
 
 Mas isso não é o fim. Há inteligência que nos permite dizer coisas como "espere X segundos após cada *`Pod`* executar antes de prosseguir para o próximo *`Pod`*". Há também testes de inicialização, testes de prontidão e testes de atividade que podem verificar a integridade e o status dos *`Pods`*. Em suma, os *Deployments* são excelentes para executar rolling updates (atualizações contínuas) e *versioned rollbacks*.
 
@@ -418,7 +418,7 @@ Os parâmetros `maxSurge` e `maxUnavailable` permitem acelerar ou desacelerar o 
 
 A imagem a seguir mostra uma atualização usando a estratégia de `RollingUpdate`:
 
-![RollingUpdate process for a Deployment](/images/articles/Kubernetes/RollingUpdate%20process%20for%20a%20Deployment.png?id=956a60b05f308b802fdaeb2f4f8362db "RollingUpdate process for a Deployment")
+<img src="{{ mix('/images/articles/Kubernetes/RollingUpdate process for a Deployment.png') }}" alt="RollingUpdate process for a Deployment">
 
 Na imagem acima, o procedimento `RollingUpdate` segue várias etapas principais. O *Deployment* tenta atualizar os *`Pods`*, um por um. Somente depois que um *`Pod`* é atualizado com sucesso, a atualização prossegue para o próximo *`Pod`*.
 
@@ -426,7 +426,7 @@ As atualizações contínuas são o padrão porque protegem contra o tempo de in
 
 O novo *ReplicaSet* é ampliado até que a contagem dos *`Pods`* seja a contagem de réplicas desejada mais o valor de `maxSurge` e, em seguida, o *Deployment* aguarda a remoção dos *`Pods`* antigos. O *ReplicaSet* antigo é reduzido para a contagem desejada menos a contagem de `maxUnavailable`, então o *Deployment* espera que os novos *`Pods`* atinjam o estado de `Ready`. Você não pode definir os dois valores como zero porque isso significa que nada mudará.
 
-![Deployment updates in progress, using different rollout options](/images/articles/Kubernetes/Deployment%20updates%20in%20progress,%20using%20different%20rollout%20options.png?id=67486e84376ae112301c1d63a9049c93 "Deployment updates in progress, using different rollout options")
+<img src="{{ mix('/images/articles/Kubernetes/Deployment updates in progress, using different rollout options.png') }}" alt="Deployment updates in progress, using different rollout options">
 
 Você pode controlar o ritmo da implantação com os dois campos a seguir na especificação de implantação:
 
@@ -459,11 +459,11 @@ spec:
 
 Como a contagem de réplicas desejada no caso era três e essas propriedades são padronizadas em `25%`, `maxSurge` permitiu que o número de todos os *`Pods`* chegasse a quatro, e `maxUnavailable` não permitia ter *`Pods`* indisponíveis (em outras palavras, três *`Pods`* tinham que estar disponíveis em todas as vezes). Isso é mostrado na imagem abaixo.
 
-![Rolling update of a Deployment with three replicas and default maxSurge and maxUnavailable](/images/articles/Kubernetes/Rolling%20update%20of%20a%20Deployment%20with%20three%20replicas%20and%20default%20maxSurge%20and%20maxUnavailable.png?id=2ca15d749129add7c35e103287f3f48c "Rolling update of a Deployment with three replicas and default maxSurge and maxUnavailable")
+<img src="{{ mix('/images/articles/Kubernetes/Rolling update of a Deployment with three replicas and default maxSurge and maxUnavailable.png') }}" alt="Rolling update of a Deployment with three replicas and default maxSurge and maxUnavailable">
 
 **Quando `maxSurge` for `1` e `maxUnavailable` também for `1`:**
 
-![Rolling update of a Deployment with the maxSurge=1 and maxUnavailable=1](/images/articles/Kubernetes/Rolling%20update%20of%20a%20Deployment%20with%20the%20maxSurge=1%20and%20maxUnavailable=1.png?id=0e8488cea9bd413cffff9ec5b83618a8 "Rolling update of a Deployment with the maxSurge=1 and maxUnavailable=1")
+<img src="{{ mix('/images/articles/Kubernetes/Rolling update of a Deployment with the maxSurge=1 and maxUnavailable=1.png') }}" alt="Rolling update of a Deployment with the maxSurge=1 and maxUnavailable=1">
 
 Nesse caso, uma réplica pode estar indisponível; portanto, se a contagem de réplicas desejada for três, apenas duas delas precisam estar disponíveis. É por isso que o processo de distribuição exclui imediatamente um *`Pod`* e cria dois novos. Isso garante que dois *`Pods`* estejam disponíveis e que o número máximo de *`Pods`* não seja excedido (o máximo é quatro neste caso - três mais um de `maxSurge`). Assim que os dois novos *`Pods`* estiverem disponíveis, os dois *`Pods`* antigos restantes serão excluídos.
 
@@ -518,7 +518,7 @@ Em resumo, o HPA monitora a utilização da CPU e da memória e inicia um evento
 
 Isso acaba se parecendo a seguinte diagrama para um *DaemonSet*:
 
-![DaemonSet spread across three nodes](/images/articles/Kubernetes/DaemonSet%20spread%20across%20three%20nodes.png?id=f4592411d617a8a2e0f2696259929a00 "DaemonSet spread across three nodes")
+<img src="{{ mix('/images/articles/Kubernetes/DaemonSet spread across three nodes.png') }}" alt="DaemonSet spread across three nodes">
 
 De acordo com a imagem acima, cada nó (representado por uma caixa) contém um *`Pod`* do aplicativo, controlado pelo *DaemonSet*.
 
@@ -526,7 +526,7 @@ De acordo com a imagem acima, cada nó (representado por uma caixa) contém um *
 
 Esses casos incluem *`Pods`* relacionados à infraestrutura que executam operações no nível do sistema. Por exemplo, você deseja executar um coletor de log e um monitor de recursos em cada nó. Outro bom exemplo é o próprio processo `kube-proxy` do *Kubernetes*, que precisa ser executado em todos os nós para fazer os serviços funcionarem.
 
-![DaemonSets run only a single pod replica on each node, whereas ReplicaSets scatter them around the whole cluster randomly](/images/articles/Kubernetes/DaemonSets%20run%20only%20a%20single%20pod%20replica%20on%20each%20node,%20whereas%20ReplicaSets%20scatter%20them%20around%20the%20whole%20cluster%20randomly.png?id=c4d3661cedcb2de74072a10a47eef448 "DaemonSets run only a single pod replica on each node, whereas ReplicaSets scatter them around the whole cluster randomly")
+<img src="{{ mix('/images/articles/Kubernetes/DaemonSets run only a single pod replica on each node, whereas ReplicaSets scatter them around the whole cluster randomly.png') }}" alt="DaemonSets run only a single pod replica on each node, whereas ReplicaSets scatter them around the whole cluster randomly">
 
 Isso torna o *DaemonSet* excelente para executar aplicativos que coletam métricas no nível do nó ou fornecem processos de rede por nó. Uma especificação do *DaemonSet* se parece com isto:
 
@@ -580,7 +580,7 @@ Este *YAML* restringirá o *DaemonSet* a nós que correspondem ao seletor `type=
 
 Vamos imaginar um *daemon* chamado `ssd-monitor` que precisa ser executado em todos os nós que contêm uma unidade de estado sólida (*SSD*). Você criará um *DaemonSet* que executa em todos os nós marcados como tendo um *SSD*. Os administradores do cluster adicionaram o label `disk=ssd` a todos esses nós, então você criará o *DaemonSet* com um *seletor de nó* que seleciona apenas nós com essa label, conforme mostrado na imagem abaixo.
 
-![Using a DaemonSet with a node selector to deploy system pods only on certain nodes](/images/articles/Kubernetes/Using%20a%20DaemonSet%20with%20a%20node%20selector%20to%20deploy%20system%20pods%20only%20on%20certain%20nodes.png?id=8df77e333ec3ae287b3b0ab3ea5d7ece "Using a DaemonSet with a node selector to deploy system pods only on certain nodes")
+<img src="{{ mix('/images/articles/Kubernetes/Using a DaemonSet with a node selector to deploy system pods only on certain nodes.png') }}" alt="Using a DaemonSet with a node selector to deploy system pods only on certain nodes">
 
 Você está definindo um *DaemonSet* que executará um *`Pod`* com um único container. Uma instância desse *`Pod`* será criada para cada nó com o *label* `disk=ssd`.
 

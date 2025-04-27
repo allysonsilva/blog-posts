@@ -22,7 +22,7 @@ Para resolver esses problemas, o *Kubernetes* também fornece outro tipo de recu
 
 Ao criar um *Service* para os *`Pods`* de `front-end` e configurá-lo para ser acessível de fora do cluster, você expõe um único *endereço IP* constante por meio do qual os *clients* externos podem se conectar aos *`Pods`*. Da mesma forma, ao criar um *Service* para o *`Pod`* de `back-end`, você cria um endereço estável para o *`Pod`* de `back-end`. O endereço do *Service* não muda, mesmo que o *endereço IP* do *`Pod`* seja alterado. Além disso, ao criar o *Service*, você também permite que os *`Pods`* de `front-end` encontrem facilmente o *Service* de `back-end` por meio do DNS interno do cluster *Kubernetes*. Todos os componentes do sistema (os dois *Services*, os dois conjuntos de *`Pods`* que dão suporte a esses *Services* e as interdependências entre eles) são mostrados na imagem abaixo.
 
-![Both internal and external clients usually connect to pods through services](/images/articles/Kubernetes/Both%20internal%20and%20external%20clients%20usually%20connect%20to%20pods%20through%20services.png?id=b8f6c4baa8f8ab6213328f44660cbc88 "Both internal and external clients usually connect to pods through services")
+<img src="{{ mix('/images/articles/Kubernetes/Both internal and external clients usually connect to pods through services.png') }}" alt="Both internal and external clients usually connect to pods through services">
 
 ## Manipulação
 
@@ -41,7 +41,7 @@ spec:
     foo: bar
 ```
 
-![Label selectors determine which pods belong to the Service](/images/articles/Kubernetes/Label%20selectors%20determine%20which%20pods%20belong%20to%20the%20Service.png?id=6e4a3175879ff55f93ad01a1d8e74625 "Label selectors determine which pods belong to the Service")
+<img src="{{ mix('/images/articles/Kubernetes/Label selectors determine which pods belong to the Service.png') }}" alt="Label selectors determine which pods belong to the Service">
 
 ### Exposição de múltiplas portas no mesmo *Service*
 
@@ -64,7 +64,7 @@ spec:
 
 ### Exposição de *Services* a clients externos
 
-![Exposing a service to external clients](/images/articles/Kubernetes/Exposing%20a%20service%20to%20external%20clients.png?id=1fde71da907c2e7a0a1f6a61d984e413 "Exposing a service to external clients")
+<img src="{{ mix('/images/articles/Kubernetes/Exposing a service to external clients.png') }}" alt="Exposing a service to external clients">
 
 Existem algumas maneiras de tornar um *Service* acessível externamente:
 
@@ -103,7 +103,7 @@ Você define o tipo como `NodePort` e especifica a porta do nó à qual este *Se
 
 A imagem abaixo mostra seu *Service* exposto na porta `30123` de ambos os nós do cluster. Uma conexão de entrada para uma dessas portas será redirecionada para um *`Pod`* selecionado aleatoriamente, que pode ou não ser aquele em execução no nó ao qual a conexão está sendo feita.
 
-![An external client connecting to a NodePort service either through Node 1 or 2](/images/articles/Kubernetes/An%20external%20client%20connecting%20to%20a%20NodePort%20service%20either%20through%20Node%201%20or%202.png?id=8cddbed3da8df6207bad7a1b06a480ca "An external client connecting to a NodePort service either through Node 1 or 2")
+<img src="{{ mix('/images/articles/Kubernetes/An external client connecting to a NodePort service either through Node 1 or 2.png') }}" alt="An external client connecting to a NodePort service either through Node 1 or 2">
 
 Uma conexão recebida na porta `30123` do primeiro nó pode ser encaminhada para o *`Pod`* em execução no primeiro nó ou para um dos *`Pods`* em execução no segundo nó.
 
@@ -168,7 +168,7 @@ curl http://130.211.53.173
 
 Consulte a imagem abaixo para ver como as solicitações HTTP são entregues ao *`Pod`*. Os *clients* externos (curl nesse caso) se conectam à porta `80` do *balanceador de carga* e são roteados para a porta do nó atribuído implicitamente em um dos nós. A partir daí, a conexão é encaminhada para uma das instâncias do *`Pod`*.
 
-![An external client connecting to a LoadBalancer service](/images/articles/Kubernetes/An%20external%20client%20connecting%20to%20a%20LoadBalancer%20service.png?id=be860d9dbf8dba7373c1d4923df529d8 "An external client connecting to a LoadBalancer service")
+<img src="{{ mix('/images/articles/Kubernetes/An external client connecting to a LoadBalancer service.png') }}" alt="An external client connecting to a LoadBalancer service">
 
 ## Expor *Services* Externamente Por Meio do *Ingress*
 
@@ -176,7 +176,7 @@ Consulte a imagem abaixo para ver como as solicitações HTTP são entregues ao 
 
 Um motivo importante é que cada *Service* `LoadBalancer` requer seu próprio *balanceador de carga* com seu próprio endereço IP público, enquanto um `Ingress` requer apenas um, mesmo ao fornecer acesso a dezenas de *Services*. Quando um cliente envia uma solicitação HTTP para o `Ingress`, o host e o caminho na solicitação determinam para qual *Service* a solicitação é encaminhada, conforme mostrado na imagem abaixo.
 
-![Multiple services can be exposed through a single Ingress](/images/articles/Kubernetes/Multiple%20services%20can%20be%20exposed%20through%20a%20single%20Ingress.png?id=9a6727119cdaa52d306c1b429e475cc0 "Multiple services can be exposed through a single Ingress")
+<img src="{{ mix('/images/articles/Kubernetes/Multiple services can be exposed through a single Ingress.png') }}" alt="Multiple services can be exposed through a single Ingress">
 
 ### Entendendo como funcionam os *Ingress*
 
@@ -184,7 +184,7 @@ A imagem abaixo mostra como o *client* se conectou a um dos *`Pods`* por meio do
 
 Como você pode ver, o controlador *Ingress* não encaminhou a solicitação ao *Service*. Ele só o usou para selecionar um *`Pod`*. A maioria, senão todos, os controladores funcionam assim.
 
-![Accessing pods through an Ingress](/images/articles/Kubernetes/Accessing%20pods%20through%20an%20Ingress.png?id=f1785496c22b0b82b40035cc7bbfe302 "Accessing pods through an Ingress")
+<img src="{{ mix('/images/articles/Kubernetes/Accessing pods through an Ingress.png') }}" alt="Accessing pods through an Ingress">
 
 #### Mapeando diferentes *Services* para diferentes caminhos do mesmo host
 

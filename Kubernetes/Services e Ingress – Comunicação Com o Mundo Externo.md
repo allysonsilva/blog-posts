@@ -18,11 +18,11 @@ Segundo, você precisa saber que os *Services* utilizam labels para selecionar d
 
 A imagem abaixo mostra um simples aplicativo baseado em *`Pod`* implantado por meio de um *Deployment*. Ele mostra um `client` que não tem um *endpoint* de rede confiável para acessar os *`Pods`*. Lembre-se de que é uma má ideia conectar diretamente em um *`Pod`* individual porque esse *`Pod`* pode ser removido a qualquer momento por meio de operações de escalonamento, atualizações, reversões e falhas.
 
-![Shows a simple Pod-based application deployed via a Kubernetes Deployment](/images/articles/Kubernetes/Shows%20a%20simple%20Pod-based%20application%20deployed%20via%20a%20Kubernetes%20Deployment.png?id=8d98c1ad1242541df74a6b7475724ed7 "Shows a simple Pod-based application deployed via a Kubernetes Deployment")
+<img src="{{ mix('/images/articles/Kubernetes/Shows a simple Pod-based application deployed via a Kubernetes Deployment.png') }}" alt="Shows a simple Pod-based application deployed via a Kubernetes Deployment">
 
 A imagem abaixo mostra o mesmo aplicativo com um *Service* adicionado. O *Service* está associado aos *`Pods`* e os fornece um IP, DNS e porta estáveis. Ele também atual como balanceador de carga (equilibra a carga de solicitações) entre os *`Pods`*.
 
-![Shows the same application with a Service added into the mix](/images/articles/Kubernetes/Shows%20the%20same%20application%20with%20a%20Service%20added%20into%20the%20mix.png?id=bc04ae4abfcae806ccabe3ce7d2d7299 "Shows the same application with a Service added into the mix")
+<img src="{{ mix('/images/articles/Kubernetes/Shows the same application with a Service added into the mix.png') }}" alt="Shows the same application with a Service added into the mix">
 
 Com um *Service* na frente de um conjunto de *`Pods`*, os *`Pods`* podem aumentar ou diminuir, podem falhar e podem ser atualizados, revertidos ... e enquanto eventos como esses ocorrem, o *Service* na frente deles observa as mudanças e atualizações sua lista de *`Pods`* saudáveis. Mas isso nunca muda o IP, DNS e porta estáveis ​​que o *Service* expõe.
 
@@ -32,7 +32,7 @@ Pense nos *Services* como tendo um *front-end* estático e um *back-end* dinâmi
 
 Os *Services* são fracamente acoplados aos *`Pods`* por meio de `labels` e *seletores de labels*. Essa é a mesma tecnologia que acopla fracamente os *`Pods`* ao *Deployments* e é a chave para a flexibilidade fornecida pelo *Kubernetes*. A imagem abaixo mostra um exemplo em que 3 *`Pods`* são rotulados como `zone=prod` e `version=1`, e o *Service* tem um seletor de label correspondente.
 
-![Shows an example where 3 Pods are labelled as zone=prod and version=1](/images/articles/Kubernetes/Shows%20an%20example%20where%203%20Pods%20are%20labelled%20as%20zone=prod%20and%20version=1.png?id=e7fa2779a4b96b193baf8a8a1e760d91 "Shows an example where 3 Pods are labelled as zone=prod and version=1")
+<img src="{{ mix('/images/articles/Kubernetes/Shows an example where 3 Pods are labelled as zone=prod and version=1.png') }}" alt="Shows an example where 3 Pods are labelled as zone=prod and version=1">
 
 Na acima, o *Service* está fornecendo rede estável para todos os três *`Pods`* - você pode enviar solicitações ao *Service* e ele as encaminhará para os *`Pods`*. Ele também fornece balanceamento de carga simples.
 
@@ -40,11 +40,11 @@ Para que um *Service* corresponda a um conjunto de *`Pods`* e, portanto, envie t
 
 A imagem abaixo mostra um exemplo em que o *Service* não corresponde a nenhum dos *`Pods`*. Isso ocorre porque o *Service* está procurando *`Pods`* com dois labels, mas os *`Pods`* possuem apenas um deles. A lógica por trás disso é um booleano **`AND`**.
 
-![Shows an example where the Service does not match any of the Pods](/images/articles/Kubernetes/Shows%20an%20example%20where%20the%20Service%20does%20not%20match%20any%20of%20the%20Pods.png?id=efddee3b0b8dfdef3f708466fbb075d1 "Shows an example where the Service does not match any of the Pods")
+<img src="{{ mix('/images/articles/Kubernetes/Shows an example where the Service does not match any of the Pods.png') }}" alt="Shows an example where the Service does not match any of the Pods">
 
 A próxima imagem mostra um exemplo que funciona. Funciona porque o *Service* está procurando dois labels e os *`Pods`* no diagrama possuem os dois. Não importa que os *`Pods`* possuam labels adicionais que o *Service* não está procurando. O *Service* está procurando *`Pods`* com dois labels, ele os encontra e ignora o fato de que os *`Pods`* têm labels adicionais - tudo o que é importante é que os *`Pods`* possuam os labels que o *Service* está procurando.
 
-![Show an example that the service works](/images/articles/Kubernetes/Show%20an%20example%20that%20the%20service%20works.png?id=25a7f26ba5ce14de157bc19ddeaae26d "Show an example that the service works")
+<img src="{{ mix('/images/articles/Kubernetes/Show an example that the service works.png') }}" alt="Show an example that the service works">
 
 Os trechos de código a seguir, do *YAML* de *Service* e YAML de *Deployment*, mostram como seletores e labels são implementados.
 
@@ -131,7 +131,7 @@ Na parte inferior da stack estão os nós do cluster que hospedam os *`Pods`*. V
 
 A imagem abaixo mostra um *Service* `NodePort` em que `3` *`Pods`* são expostos externamente na porta `30050` em cada nó do cluster. Na *etapa 1*, um *client externo* atinge o Nó 2 na porta `30050`. Na *etapa 2*, ele é redirecionado para o objeto *Service* (isso acontece mesmo que o Nó 2 não esteja executando um *`Pod`* do *Service*). A *etapa 3* mostra que o *Service* tem um objeto `Endpoint` associado com uma lista sempre atualizada de *`Pods`* que correspondem ao seletor de label. A *etapa 4* mostra o *client* sendo direcionado para `Pod1` no `Node1`.
 
-![Shows a NodePort Service where 3 Pods are exposed externally on port 30050 on every node in the cluster](/images/articles/Kubernetes/Shows%20a%20NodePort%20Service%20where%203%20Pods%20are%20exposed%20externally%20on%20port%2030050%20on%20every%20node%20in%20the%20cluster.png?id=5896c95af69bbbfbfed2e46a976d58c7 "Shows a NodePort Service where 3 Pods are exposed externally on port 30050 on every node in the cluster")
+<img src="{{ mix('/images/articles/Kubernetes/Shows a NodePort Service where 3 Pods are exposed externally on port 30050 on every node in the cluster.png') }}" alt="Shows a NodePort Service where 3 Pods are exposed externally on port 30050 on every node in the cluster">
 
 O *Service* poderia facilmente ter direcionado o cliente para `Pod2` ou `Pod3`. Na verdade, as solicitações futuras podem ir para outros *`Pods`* enquanto o *Service* executa o load-balancing básico.
 
@@ -312,7 +312,7 @@ spec:
 
 Como visto no *YAML* acima, é definido um objeto `nodePort`/`.spec.ports[0].nodePort` no intervalo `30000-32767`, neste caso, `31233`. Para ver exatamente como este Service `NodePort` funciona entre os nós, veja no seguinte diagrama:
 
-![NodePort Service](/images/articles/Kubernetes/NodePort%20Service.png?id=36ad1a701af6f8a80fdd1f7402c02624 "NodePort Service")
+<img src="{{ mix('/images/articles/Kubernetes/NodePort Service.png') }}" alt="NodePort Service">
 
 Como pode ser visto, embora o *Service* seja acessível em todos os nós do cluster (`nó A`, `nó B` e `nó C`), as solicitações de rede ainda têm balanceamento de carga entre os *`Pods`* em todos os nós (`Pod A`, `Pod B` e `Pod C`). Essa é uma maneira eficaz de garantir que o aplicativo possa ser acessado de qualquer nó. Ao usar *Services* em nuvem, no entanto, você tem uma variedade de ferramentas para distribuir solicitações entre os servidores. O próximo tipo de *Service*, `LoadBalancer`, nos permite usar essas ferramentas no contexto do *Kubernetes*.
 
@@ -394,7 +394,7 @@ Como nosso Service `ExternalName` não está realmente encaminhando solicitaçõ
 
 O diagrama a seguir mostra como um *Service* `ExternalName` pode ser usado neste padrão:
 
-![ExternalName Service configuration](/images/articles/Kubernetes/ExternalName%20Service%20configuration.png?id=f5a7d56dd0edca83c1141fb9084fef97 "ExternalName Service configuration")
+<img src="{{ mix('/images/articles/Kubernetes/ExternalName Service configuration.png') }}" alt="ExternalName Service configuration">
 
 No diagrama anterior, o `EC2 Running Legacy Application` é uma *VM AWS*, externa ao cluster. O `Service B` do tipo `ExternalName` encaminhará as solicitações para a *VM*. Dessa forma, o `Pod C` (ou qualquer outro *`Pod`* no cluster) pode acessar o aplicativo legado externo simplesmente por meio do nome DNS do *Kubernetes* dos *Services* de `ExternalName`.
 
@@ -509,7 +509,7 @@ spec:
 
 No YAML anterior, o Ingress tem um valor de host único, que corresponderia ao cabeçalho `host` da solicitação/request para o tráfego passando para o Ingress. Então, temos duas URLs, `/a` e `/b`, que levam aos dois Services ClusterIP criados anteriormente. Para colocar essa configuração em um formato gráfico, vamos dar uma olhada no seguinte diagrama:
 
-![Kubernetes Ingress example](/images/articles/Kubernetes/Kubernetes%20Ingress%20example.png?id=b7f4b007bd884cbb98eeccaefc8bc5e5 "Kubernetes Ingress example")
+<img src="{{ mix('/images/articles/Kubernetes/Kubernetes Ingress example.png') }}" alt="Kubernetes Ingress example">
 
 Como visto na imagem acima, as regras simples baseadas nas URLs resultam em solicitações de rede sendo roteadas diretamente para os *Pods* adequados. Isso ocorre porque `nginx-ingress` usa o `selector` do Service para obter uma lista de IPs dos *Pods*, mas não usa diretamente o *Service* para se comunicar com os Pods. Em vez disso, a configuração do Nginx (neste caso) é atualizada automaticamente à medida que novos IPs dos Pods ficam online.
 

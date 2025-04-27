@@ -8,7 +8,7 @@ summary: "Conhecendo sobre Pods, a unidade básica, mais simples do K8s"
 
 > **Um *Pod* é um ou conjunto de containers e representa o bloco de construção básico no Kubernetes.** Em vez de implantar e gerenciar containers individualmente, você sempre implanta e opera em um conjunto de containers. O principal ponto sobre os *`Pods`* é que, quando um *Pod* contém vários containers, todos eles sempre são executados em um único *nó de trabalho* - nunca se estende por vários *nós de trabalho*, como mostrado na imagem abaixo.
 
-![All containers of a pod run on the same node. A pod never spans two nodes](/images/articles/Kubernetes/All%20containers%20of%20a%20pod%20run%20on%20the%20same%20node.%20A%20pod%20never%20spans%20two%20nodes.png?id=31ffdf4fd1fc125da0f2b6c00e043992 "All containers of a pod run on the same node. A pod never spans two nodes")
+<img src="{{ mix('/images/articles/Kubernetes/All containers of a pod run on the same node. A pod never spans two nodes.png') }}" alt="All containers of a pod run on the same node. A pod never spans two nodes">
 
 ## Compreendendo os *Pods*
 
@@ -38,13 +38,13 @@ Normalmente, os componentes do front-end têm requisitos de dimensionamento comp
 
 Se você precisar dimensionar seu aplicativo, adicione ou remova *`Pods`*. Você não escalona adicionando mais containers a um *`Pod`* existente. Os *`Pod`* de vários containers são apenas para situações em que dois containers diferentes, mas complementares, precisam compartilhar recursos. A imagem abaixo mostra como dimensionar o *front-end* nginx de um aplicativo usando vários *`Pod`* como unidade de dimensionamento.
 
-![Scaling with Pods](/images/articles/Kubernetes/Scaling%20with%20Pods.png?id=9d8383e891c99ef21b7565c2e8f4d4a7 "Scaling with Pods")
+<img src="{{ mix('/images/articles/Kubernetes/Scaling with Pods.png') }}" alt="Scaling with Pods">
 
 ### Entendendo quando usar vários containers em um *Pod*
 
 A principal razão para colocar vários containers em um único *`Pod`* é **quando o aplicativo consiste em um processo principal e um ou mais processos complementares**, conforme mostrado na imagem abaixo.
 
-![Pods should contain tightly coupled containers, usually a main container and containers that support the main one](/images/articles/Kubernetes/Pods%20should%20contain%20tightly%20coupled%20containers,%20usually%20a%20main%20container%20and%20containers%20that%20support%20the%20main%20one.png?id=16eccdc32976dc65fad5828bd8cfed9b "Pods should contain tightly coupled containers, usually a main container and containers that support the main one")
+<img src="{{ mix('/images/articles/Kubernetes/Pods should contain tightly coupled containers, usually a main container and containers that support the main one.png') }}" alt="Pods should contain tightly coupled containers, usually a main container and containers that support the main one">
 
 ### Decidindo quando usar vários containers em um *Pod*
 
@@ -56,7 +56,7 @@ Para recapitular como os containers devem ser agrupados em *`Pods`* - ao decidir
 
 Basicamente, você deve sempre preferir executar os containers em *`Pods`* separados, a menos que um motivo específico exija que eles façam parte do mesmo *`Pod`*.
 
-![A container shouldn't run multiple processes. A pod shouldn't contain multiple containers if they don't need to run on the same machine](/images/articles/Kubernetes/A%20container%20shouldnt%20run%20multiple%20processes.%20A%20pod%20shouldnt%20contain%20multiple%20containers%20if%20they%20dont%20need%20to%20run%20on%20the%20same%20machine.png?id=de3322e641819bd761df6cbb76d2717c "A container shouldn't run multiple processes. A pod shouldn't contain multiple containers if they don't need to run on the same machine")
+<img src="{{ mix('/images/articles/Kubernetes/A container shouldnt run multiple processes. A pod shouldnt contain multiple containers if they dont need to run on the same machine.png') }}" alt="A container shouldn&#039;t run multiple processes. A pod shouldn&#039;t contain multiple containers if they don&#039;t need to run on the same machine">
 
 ## Implantando *Pods*
 
@@ -64,7 +64,7 @@ Lembre-se de que os *`Pods`* são apenas um meio para a execução de um aplicat
 
 Para implantar um *`Pod`* em um *cluster Kubernetes*, você o define em um arquivo de manifesto e faz uma chamada `POST` desse arquivo de manifesto para o *`API server`*. O plano de controle verifica a configuração do arquivo *YAML*, grava no armazenamento do cluster e o implanta em um nó íntegro com recursos disponíveis. Esse processo é idêntico para *`Pods`* de um único container e *`Pods`* com vários containers.
 
-![How do we deploy Pods](/images/articles/Kubernetes/How%20do%20we%20deploy%20Pods.png?id=243e75f6a101dfc33a7edb2fa5d9ed8b "How do we deploy Pods")
+<img src="{{ mix('/images/articles/Kubernetes/How do we deploy Pods.png') }}" alt="How do we deploy Pods">
 
 ```bash
 cat <<EOF | kubectl apply -f -
@@ -113,11 +113,11 @@ Vejamos como isso afeta a rede.
 
 Se você estiver executando vários containers em um *`Pod`*, todos eles compartilham o mesmo ambiente do *`Pod`*. Isso inclui coisas como o *IPC namespace*, *memória compartilhada*, volumes, rede e muito mais. Por exemplo, isso significa que todos os containers no mesmo *`Pod`* compartilharão o mesmo endereço IP (o IP do *`Pod`*). Isso é mostrado na imagem abaixo.
 
-![Same Pod environment](/images/articles/Kubernetes/Same%20Pod%20environment.png?id=0b9333c572f6c55aca3efca444c75484 "Same Pod environment")
+<img src="{{ mix('/images/articles/Kubernetes/Same Pod environment.png') }}" alt="Same Pod environment">
 
 Se dois containers no mesmo *`Pod`* precisam se comunicar (container a container dentro do *`Pod`*), eles podem usar as portas na interface `localhost` do *`Pod`*, conforme mostrado na imagem abaixo.
 
-![Same Pod environment - localhost](/images/articles/Kubernetes/Same%20Pod%20environment%20-%20localhost.png?id=1e84bb6f004126bba42f4aa95b470f92 "Same Pod environment - localhost")
+<img src="{{ mix('/images/articles/Kubernetes/Same Pod environment - localhost.png') }}" alt="Same Pod environment - localhost">
 
 Os *`Pods`* de vários containers são ideais quando você tem requisitos para containers fortemente acoplados que podem precisar compartilhar memória e armazenamento. No entanto, se você não precisa acoplar seus containers, coloque-os em seus próprios *`Pods`*. Isso mantém as coisas limpas, pois cada *`Pod`* é dedicado a uma única tarefa. Ele também cria muito tráfego de rede não criptografada.
 
@@ -127,11 +127,11 @@ Cada *`Pod`* cria seu próprio `namespace` de rede. Isso inclui: um único ender
 
 Os containers em um *`Pod`* compartilham a mesma rede, de modo que cada container tem o mesmo endereço IP - o endereço IP do *`Pod`*. Vários containers podem receber tráfego externo, mas precisam escutar em portas diferentes, e os containers dentro do mesmo *`Pod`* podem se comunicar usando o `localhost`. Cada container tem seu próprio sistema de arquivos, mas pode montar volumes do *`Pod`*, para que os containers possam trocar informações compartilhando as mesmas montagens. A imagem abaixo mostra o layout de um *`Pod`* com dois containers.
 
-![The Pod is a shared network and storage environment for many containers](/images/articles/Kubernetes/The%20Pod%20is%20a%20shared%20network%20and%20storage%20environment%20for%20many%20containers.png?id=dc454e6bdba9eeb3171ffd429d078679 "The Pod is a shared network and storage environment for many containers")
+<img src="{{ mix('/images/articles/Kubernetes/The Pod is a shared network and storage environment for many containers.png') }}" alt="The Pod is a shared network and storage environment for many containers">
 
 A imagem abaixo mostra dois *`Pods`*, cada um com seu próprio IP. Mesmo que um deles seja um *`Pod`* de vários containers, ele ainda obtém apenas um único IP.
 
-![Pods and shared networking](/images/articles/Kubernetes/Pods%20and%20shared%20networking.png?id=2712bec25975d3f15bf88c813b6d851d "Pods and shared networking")
+<img src="{{ mix('/images/articles/Kubernetes/Pods and shared networking.png') }}" alt="Pods and shared networking">
 
 Na imagem acima, o acesso externo aos containers no *`Pod 1`* é obtido por meio do endereço IP do *`Pod`* acoplado à porta do container que você deseja alcançar. Por exemplo, `10.0.10.15:80` o levará ao container principal (`Main container`). A comunicação entre containers funciona por meio do `localhost` do *`Pod`* e do número da porta. Por exemplo, o container principal pode alcançar o container de suporte (`Supporting container`) via `localhost:5000`.
 
@@ -141,11 +141,11 @@ No entanto, como já dissemos, é mais do que apenas networking. Todos os contai
 
 Esse modelo de rede torna a comunicação entre os *`Pods`* realmente simples. Cada *`Pod`* no cluster tem seus próprios endereços IP que são totalmente roteáveis. Como cada *`Pod`* obtém seu próprio IP roteável, eles podem se comunicar entre si sem a necessidade de mapeamentos de portas.
 
-![Inter-Pod communication](/images/articles/Kubernetes/Inter-Pod%20communication.png?id=25e3ff9928876a3e8087b7941640c7c0 "Inter-Pod communication")
+<img src="{{ mix('/images/articles/Kubernetes/Inter-Pod communication.png') }}" alt="Inter-Pod communication">
 
 Conforme mencionado anteriormente, a comunicação *intra-pod* - onde dois containers no mesmo *`Pod`* precisam se comunicar - pode acontecer por meio da interface `localhost` do *`Pod`*.
 
-![Intra-Pod communication](/images/articles/Kubernetes/Intra-Pod%20communication.png?id=d40d6fa31c9854607607e4e504024a74 "Intra-Pod communication")
+<img src="{{ mix('/images/articles/Kubernetes/Intra-Pod communication.png') }}" alt="Intra-Pod communication">
 
 Se você precisa expor vários containers no mesmo *`Pod`* para o mundo externo, poderá expô-los em portas individuais. *Cada container precisa de sua própria porta, e dois containers no mesmo *`Pod`* não podem usar a mesma porta.*
 
@@ -159,7 +159,7 @@ O ciclo de vida de um *`Pod`* é mais ou menos assim. Você o define em um arqui
 
 Quando um *`Pod`* não pode ser iniciado, ele pode permanecer no estado **pending** ou vai para o estado de **failed**. Tudo isso é mostrado na imagem abaixo.
 
-![Pod lifecycle](/images/articles/Kubernetes/Pod%20lifecycle.png?id=ca4a297f0ddfb4b05365a7ff4595964f "Pod lifecycle")
+<img src="{{ mix('/images/articles/Kubernetes/Pod lifecycle.png') }}" alt="Pod lifecycle">
 
 Para ver quais *`Pods`* estão em execução no cluster, você pode executar `kubectl get pods` para obter os *`Pods`* no namespace `default` do contexto atual ou `kubectl get pods --all-namespaces` para obter os *`Pods`* em todos os namespaces.
 
@@ -212,7 +212,7 @@ Os *`Pods`* com vários containers, por outro lado, são mais complexos, mas pod
 
 A imagem a seguir mostra uma implementação de *common sidecar*:
 
-![Common sidebar implementation](/images/articles/Kubernetes/Common%20sidebar%20implementation.png?id=d25cee1d6d4bebd568ffb39437e8945c "Common sidebar implementation")
+<img src="{{ mix('/images/articles/Kubernetes/Common sidebar implementation.png') }}" alt="Common sidebar implementation">
 
 Na imagem acima, temos um único *`Pod`* com dois containers: o container do aplicativo executando um servidor da web e um aplicativo de logging que extrai os logs do *`Pod`* do servidor e encaminha para a infraestrutura de logging. Esse é um uso muito aplicável do *sidecar pattern*.
 
@@ -304,7 +304,7 @@ O que é importante e um tanto surpreendente é que o *Scheduler* não olha quan
 
 Isso é visualizado na imagem abaixo. Três *`Pods`* são implantados no nó. Juntos, eles solicitaram *80%* da CPU do nó e *60%* da memória. O *`Pod D`*, mostrado na parte inferior direita da imagem, não pode ser agendado no nó porque requer *25%* da CPU, o que é mais do que *20%* da CPU não alocada. O fato de os três *`Pods`* estarem usando atualmente apenas 70% da CPU não faz diferença.
 
-![The Scheduler only cares about requests, not actual usage](/images/articles/Kubernetes/The%20Scheduler%20only%20cares%20about%20requests,%20not%20actual%20usage.png?id=389049c2b50978e00c5c35a1deca18cb "The Scheduler only cares about requests, not actual usage")
+<img src="{{ mix('/images/articles/Kubernetes/The Scheduler only cares about requests, not actual usage.png') }}" alt="The Scheduler only cares about requests, not actual usage">
 
 #### Configurando aplicativos com containers *init*
 
@@ -316,7 +316,7 @@ Se vários containers `init` forem especificados, eles serão executados em orde
 
 Cada container `init` precisa ser concluído com sucesso antes que o próximo comece, e todos devem ser concluídos com sucesso antes que os containers do *`Pod`* sejam iniciados. A imagem abaixo mostra a sequência de inicialização de um *`Pod`* com containers `init`.
 
-![Init containers are useful for startup tasks to prepare the Pod for the app containers](/images/articles/Kubernetes/Init%20containers%20are%20useful%20for%20startup%20tasks%20to%20prepare%20the%20Pod%20for%20the%20app%20containers.png?id=9d9122bc7f0b7310f0c161b9ea3ad096 "Init containers are useful for startup tasks to prepare the Pod for the app containers")
+<img src="{{ mix('/images/articles/Kubernetes/Init containers are useful for startup tasks to prepare the Pod for the app containers.png') }}" alt="Init containers are useful for startup tasks to prepare the Pod for the app containers">
 
 No *`Pod`* a seguir, o container `init` está executando um loop para verificar se `config-service` existe por meio do `nslookup`. Depois de ver que `config-service` está ativo, o script termina, o que aciona o início do container `my-app`:
 
@@ -340,7 +340,7 @@ spec:
 
 A imagem do diagrama abaixo mostra o fluxo típico de inicialização do *`Pod`* no Kubernetes:
 
-![Init container flowchart](/images/articles/Kubernetes/Init%20container%20flowchart.png?id=5fb8a605c3b63b54963eb2d389f76458 "Init container flowchart")
+<img src="{{ mix('/images/articles/Kubernetes/Init container flowchart.png') }}" alt="Init container flowchart">
 
 Se um *`Pod`* tiver mais de um `initContainers`, eles serão executados sequencialmente. Isso é importante quando os `initContainers` com etapas modulares são executados em ordem. O seguinte *YAML* mostra isso:
 
@@ -419,7 +419,7 @@ Ao contrário de *liveness probes*, se um container falhar na verificação do *
 
 Como você pode ver na imagem abaixo, se o *readiness probes* de um *`Pod`* falhar, o *`Pod`* será removido do objeto `Endpoints`. Os *clients* que se conectam ao *Service* não serão redirecionados ao *`Pod`*. O efeito é o mesmo de quando o *`Pod`* não corresponde ao seletor da label do *Service*.
 
-![A pod whose readiness probe fails is removed as an endpoint of a service](/images/articles/Kubernetes/A%20pod%20whose%20readiness%20probe%20fails%20is%20removed%20as%20an%20endpoint%20of%20a%20service.png?id=914a57ecaa9ec02b12f6596b389221c7 "A pod whose readiness probe fails is removed as an endpoint of a service")
+<img src="{{ mix('/images/articles/Kubernetes/A pod whose readiness probe fails is removed as an endpoint of a service.png') }}" alt="A pod whose readiness probe fails is removed as an endpoint of a service">
 
 ##### Entendendo por que os *Readiness probes* são importantes
 

@@ -69,7 +69,7 @@ Para executar aplicativos em um **cluster Kubernetes**, seguimos este simples pa
 
 ## Arquitetura do Kubernetes
 
-![Kubernetes architecture](/images/articles/Kubernetes/Kubernetes%20architecture.png?id=d83867cce3d6eba3a916b25eb2af4de8 "Kubernetes architecture")
+<img src="{{ mix('/images/articles/Kubernetes/Kubernetes architecture.png') }}" alt="Kubernetes architecture">
 
 A primeira coisa a entender é com quais componentes o *`API server`* pode interagir. No diagrama anterior, podemos dizer que o *`API server`* pode se comunicar com quase todos os componentes (exceto o *`container runtime`*, que é gerenciado pelo *`kubelet`*) e que também serve para interagir diretamente com os usuários finais (`CLI` ou `API RESTful`). Esse design faz com que o *`API server`* atue como o "coração" do **Kubernetes**. Além disso, o *`API server`* também examina as solicitações de entrada e grava objetos da API em seu armazenamento (`etcd`). Em outras palavras, isso torna o *`API server`* o responsável pelas medidas de controle de segurança, como autenticação, autorização e auditoria.
 
@@ -109,11 +109,11 @@ Além de fornecer uma maneira consistente de armazenar objetos no *`etcd`*, ele 
 
 Um dos clientes do *`API server`* é a ferramenta de linha de comando *`kubectl`*. Ao criar um recurso de um arquivo *YAML*, por exemplo, *`kubectl`* envia o conteúdo do arquivo para o *`API server`* por meio de uma request `POST HTTPs`. A imagem abaixo, mostra o que acontece dentro do *`API server`* quando ele recebe a request. Isso é explicado com mais detalhes nos próximos subtópicos.
 
-![The operation of the API server](/images/articles/Kubernetes/The%20operation%20of%20the%20API%20server.png?id=201ffd90b050e5b7a552bbe468fc2e05 "The operation of the API server")
+<img src="{{ mix('/images/articles/Kubernetes/The operation of the API server.png') }}" alt="The operation of the API server">
 
 O diagrama a seguir mostra o ciclo de vida da request da API e o que acontece dentro do *`API server`* quando ele recebe uma request:
 
-![API server HTTP request flow](/images/articles/Kubernetes/API%20server%20HTTP%20request%20flow.png?id=5396dd73913139beb5c9f389b890976f "API server HTTP request flow")
+<img src="{{ mix('/images/articles/Kubernetes/API server HTTP request flow.png') }}" alt="API server HTTP request flow">
 
 Como você pode ver no diagrama anterior, a request HTTP passa pelos estágios de autenticação, autorização e controle de admissão. Vamos dar uma olhada em cada um deles nos subtópicos a seguir.
 
@@ -179,7 +179,7 @@ Ao identificar os nós que são capazes de executar os pods, o scheduler executa
 
 *O scheduler não é responsável por executar os pods, apenas escolhe os nós em que os pods será executada.*
 
-![The Scheduler finds acceptable nodes for a pod and then selects the best node for the pod](/images/articles/Kubernetes/The%20Scheduler%20finds%20acceptable%20nodes%20for%20a%20pod%20and%20then%20selects%20the%20best%20node%20for%20the%20pod.png?id=eee594302fe5f7704e9344aa89c7199d "The Scheduler finds acceptable nodes for a pod and then selects the best node for the pod")
+<img src="{{ mix('/images/articles/Kubernetes/The Scheduler finds acceptable nodes for a pod and then selects the best node for the pod.png') }}" alt="The Scheduler finds acceptable nodes for a pod and then selects the best node for the pod">
 
 **A seleção de um nó pode ser dividida em duas partes, conforme mostrado na imagem acima:**
 
@@ -262,7 +262,7 @@ O *`API server`* é o front-end para o plano de controle e todas as instruções
 
 A imagem abaixo mostra uma visão de alto nível de um *nó mestre* no *Kubernetes* (plano de controle).
 
-![Kubernetes Master](/images/articles/Kubernetes/Kubernetes%20Master.png?id=96f83bc76137fa6186631b964d6ff15e "Kubernetes Master")
+<img src="{{ mix('/images/articles/Kubernetes/Kubernetes Master.png') }}" alt="Kubernetes Master">
 
 #### Verificando o status dos componentes do plano de controle
 
@@ -304,7 +304,7 @@ Em suma, o *Kubelet* é o componente responsável por tudo que está sendo execu
 
 O *Kubelet* também é o componente que executa os testes de atividade (*liveness probes*) do contêiner, reiniciando os contêineres quando os testes falham. Por último, ele encerra os contêineres quando seu pod é excluído do *`API server`* e notifica o servidor de que o *pod* foi encerrado.
 
-![The Kubelet runs pods based on pod specs from the API server and a local file directory](/images/articles/Kubernetes/The%20Kubelet%20runs%20pods%20based%20on%20pod%20specs%20from%20the%20API%20server%20and%20a%20local%20file%20directory.png?id=c72f58291eb994827c62cb63cd4ccb16 "The Kubelet runs pods based on pod specs from the API server and a local file directory")
+<img src="{{ mix('/images/articles/Kubernetes/The Kubelet runs pods based on pod specs from the API server and a local file directory.png') }}" alt="The Kubelet runs pods based on pod specs from the API server and a local file directory">
 
 #### *Container runtime*
 
@@ -322,7 +322,7 @@ O *`kube-proxy`* é um proxy de rede executado em todos os *nós* do cluster e �
 
 Todos os *componentes* mencionados anteriormente são executados como **processos individuais**.
 
-![Kubernetes components of the Control Plane and the worker nodes](/images/articles/Kubernetes/Kubernetes%20components%20of%20the%20Control%20Plane%20and%20the%20worker%20nodes.png?id=d0367821144185cf020dc8550e522221 "Kubernetes components of the Control Plane and the worker nodes")
+<img src="{{ mix('/images/articles/Kubernetes/Kubernetes components of the Control Plane and the worker nodes.png') }}" alt="Kubernetes components of the Control Plane and the worker nodes">
 
 Os componentes se comunicam apenas com o *`API server`*. Eles não falam um com o outro diretamente. O *`API server`* é o único componente que se comunica com o *`etcd`*. Nenhum dos outros componentes se comunica diretamente com o *`etcd`*, mas, em vez disso, modificam o estado do *cluster* conversando com o *`API server`*.
 
@@ -336,13 +336,13 @@ Agora você sabe sobre todos os **componentes de um cluster** do *Kubernetes*. A
 
 Antes mesmo de iniciar todo o processo, os controladores, o *Scheduler* e o *Kubelet* estão observando o *`API server`* em busca de alterações em seus respectivos tipos de recursos. Isso é mostrado na imagem abaixo. Cada um dos componentes representados na imagem desempenhará uma responsabilidade no processo que você está prestes a desencadear. O diagrama não inclui o *`etcd`*, porque está oculto atrás do *`API server`* e você pode pensar no *`API server`* como o local onde os objetos são armazenados.
 
-![Kubernetes components watching API objects through the API server](/images/articles/Kubernetes/Kubernetes%20components%20watching%20API%20objects%20through%20the%20API%20server.png?id=1a435317a52e2484773b37ea40495766 "Kubernetes components watching API objects through the API server")
+<img src="{{ mix('/images/articles/Kubernetes/Kubernetes components watching API objects through the API server.png') }}" alt="Kubernetes components watching API objects through the API server">
 
 #### A cadeia de eventos
 
 Imagine que você preparou o arquivo *YAML* contendo o manifesto de *Deployment* e está perto de enviar ao *Cluster Kubernetes* por meio do *`kubectl`*. O *`kubectl`* então, envia o manifesto ao *`API server`*  em uma request *HTTP POST*. O *`API server`* valida a especificação de *Deployment*, armazena-a no *`etcd`* e retorna uma resposta para o *`kubectl`*. Agora, uma cadeia de eventos começa a se desdobrar, conforme imagem abaixo.
 
-![The chain of events that unfolds when a Deployment resource is posted to the API server](/images/articles/Kubernetes/The%20chain%20of%20events%20that%20unfolds%20when%20a%20Deployment%20resource%20is%20posted%20to%20the%20API%20server.png?id=03a8b633db0575389900e9724bc0b568 "The chain of events that unfolds when a Deployment resource is posted to the API server")
+<img src="{{ mix('/images/articles/Kubernetes/The chain of events that unfolds when a Deployment resource is posted to the API server.png') }}" alt="The chain of events that unfolds when a Deployment resource is posted to the API server">
 
 **1. O *Deployment Controller* cria o *ReplicaSet***
 
@@ -392,7 +392,7 @@ Em seguida, você define um *Pod Kubernetes* para executar o *aplicativo* em um 
 
 A imagem abaixo mostra o código do *aplicativo* empacotado como um contêiner, em execução dentro de um *Pod*, gerenciado por um controlador *Deployment*.
 
-![Shows application code packaged as a container, running inside a Pod, managed by a Deployment controller](/images/articles/Kubernetes/Shows%20application%20code%20packaged%20as%20a%20container,%20running%20inside%20a%20Pod,%20managed%20by%20a%20Deployment%20controller.png?id=09e50bf49b19ba78397e8023dfe8101a "Shows application code packaged as a container, running inside a Pod, managed by a Deployment controller")
+<img src="{{ mix('/images/articles/Kubernetes/Shows application code packaged as a container, running inside a Pod, managed by a Deployment controller.png') }}" alt="Shows application code packaged as a container, running inside a Pod, managed by a Deployment controller">
 
 Depois que tudo estiver definido no arquivo *YAML* do *Deployment*, faça uma request `POST` para a *`API server`* como o estado desejado do *aplicativo* e deixe o *Kubernetes* implantá-lo.
 
@@ -418,7 +418,7 @@ Depois que a solicitação é autenticada e autorizada, o *Kubernetes* inspecion
 
 Por fim, o Kubernetes utiliza loops de reconciliação em background que monitoram constantemente o estado do cluster. Se o estado atual do cluster variar do estado desejado, o Kubernetes executará todas as tarefas necessárias para reconciliar o problema.
 
-![Desired state](/images/articles/Kubernetes/Desired%20state.png "Desired state")
+<img src="{{ mix('/images/articles/Kubernetes/Desired state.png') }}" alt="Desired state">
 
 O *modelo declarativo* não é apenas muito mais simples do que scripts longos com muitos comandos imperativos, mas também permite *self-healing*, o dimensionamento e funciona para o controle de versão e auto-documentação. Ele faz isso informando ao cluster como as coisas devem ser. Se eles pararem de se parecer com isso, o *cluster* perceberá a discrepância e fará todo o trabalho árduo para reconciliar a situação.
 
@@ -430,7 +430,7 @@ O *`API server`* gerencia as comunicações entre o usuário final e o *Kubernet
 
 Vamos dar uma olhada o que acontece quando você executa um comando *`kubectl`*. Dê uma olhada na imagem a seguir, que fornece uma visão geral do processo:
 
-![A representative flowchart for the kubectl utility](/images/articles/Kubernetes/A%20representative%20flowchart%20for%20the%20kubectl%20utility.png?id=9acdc788ccf6dd223a1c2795514b3b65 "A representative flowchart for the kubectl utility")
+<img src="{{ mix('/images/articles/Kubernetes/A representative flowchart for the kubectl utility.png') }}" alt="A representative flowchart for the kubectl utility">
 
 Um comando *`kubectl`* é traduzido em uma chamada de *API*, que é enviada ao *`API server`*. O *`API server`* então autentica e valida as solicitações. Assim que os estágios de autenticação e validação forem bem-sucedidos, o *`API server`* recupera ou atualiza os dados no *`etcd`* e responde com as informações solicitadas.
 
@@ -438,7 +438,7 @@ Um comando *`kubectl`* é traduzido em uma chamada de *API*, que é enviada ao *
 
 Como um objeto da API do Kubernetes é gerenciado por diferentes componentes do Kubernetes? Vamos considerar um *Pod* como exemplo. Seu *ciclo de vida* pode ser ilustrado da seguinte forma:
 
-![The process behind the creation of a pod](/images/articles/Kubernetes/The%20process%20behind%20the%20creation%20of%20a%20pod.png?id=4163110a41304973978561b526d9a3b0 "The process behind the creation of a pod")
+<img src="{{ mix('/images/articles/Kubernetes/The process behind the creation of a pod.png') }}" alt="The process behind the creation of a pod">
 
 Todo este processo pode ser dividido da seguinte forma:
 
