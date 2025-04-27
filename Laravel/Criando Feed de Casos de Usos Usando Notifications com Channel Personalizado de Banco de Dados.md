@@ -13,8 +13,6 @@ Para que isso possa acontecer, primeiro é necessário criar a tabela para que o
 ## Criando tabela para manipular as notificações
 
 ```php
-<?php
-
 use App\Enums\UserNotificationType;
 use App\Enums\UserNotificationStatus;
 use Illuminate\Support\Facades\Schema;
@@ -69,8 +67,6 @@ A coluna de `status` é pra saber se a notificação é uma notificação de `su
 O _enum_ de `UserNotificationCausedBy` tem o seguinte conteúdo:
 
 ```php
-<?php
-
 namespace App\Enums;
 
 enum UserNotificationCausedBy: string
@@ -88,8 +84,6 @@ enum UserNotificationCausedBy: string
 O _enum_ de `UserNotificationType` tem o seguinte conteúdo:
 
 ```php
-<?php
-
 namespace App\Enums;
 
 enum UserNotificationType: string
@@ -106,10 +100,8 @@ enum UserNotificationType: string
 ```
 
 O _enum_ de `UserNotificationStatus` tem o seguinte conteúdo:
- 
-```php
-<?php
 
+```php
 namespace App\Enums;
 
 enum UserNotificationStatus: string
@@ -127,8 +119,6 @@ enum UserNotificationStatus: string
 ### Criando Model de `UserNotification`
 
 ```php
-<?php
-
 namespace App\Support\Notifications;
 
 use App\Models\User;
@@ -305,8 +295,6 @@ class UserNotification extends Model
 Para relacionar o `subject` com as notificações, ou seja, para recuperar determinadas notificações em que determinada Model está nas colunas morph de `subject_type` e `subject_id` utilize a trait na model acima:
 
 ```php
-<?php
-
 namespace App\Support\Notifications\Traits;
 
 use App\Support\Notifications\UserNotification;
@@ -349,8 +337,6 @@ O nome do canal em que estamos manipulando vai se chamar `UserUseCaseChannel`, j
 O arquivo de `UserUseCaseChannel.php` tem o seguinte conteúdo:
 
 ```php
-<?php
-
 namespace App\Support\Notifications;
 
 use App\Models\User;
@@ -374,11 +360,9 @@ class UserUseCaseChannel
 
 O canal acima, usa o método de `toUserUseCase` que basicamente tem toda lógica de salvar os dados da notificação no banco de dados.
 
-Para favorecer o principio do **DRY**, vamos criar uma classe abstrata de `UserUseCaseNotification` que terá o método de `toUserUseCase` além de alguns métodos obrigatórios que as classes de notificações terão de implementar. 
+Para favorecer o principio do **DRY**, vamos criar uma classe abstrata de `UserUseCaseNotification` que terá o método de `toUserUseCase` além de alguns métodos obrigatórios que as classes de notificações terão de implementar.
 
 ```php
-<?php
-
 namespace App\Support\Notifications;
 
 use App\Models\User;
@@ -487,8 +471,6 @@ Para criar uma notificação de "atividade" ou "caso de uso" do negócio, é nec
 Vamos criar uma classe de notificação pra quando o usuário tem o pagamento feito/processado com sucesso. O nome da classe vai se chamar `PaymentDone` com o seguinte código:
 
 ```php
-<?php
-
 namespace App\Notifications;
 
 use App\Enums\UserNotificationType;

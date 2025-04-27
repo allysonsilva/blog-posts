@@ -29,8 +29,6 @@ A migration a seguir deve ser executada para que:
 3. Quando o code do telefone via SMS fosse validado com sucesso, então, a coluna de `phone_verified_at` teria a data em que isso aconteceu.
 
 ```php
-<?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -72,8 +70,6 @@ return new class extends Migration
 A model de `User` tem um dos principais métodos que é o `saveVerificationCode`, responsável por criar e salvar os códigos de verificação na coluna de `verification_codes`. Além do mais, métodos que recuperem os códigos `smsCode` e `emailCode`, e também o conceito de "ativação de conta do usuário" `activateAccount`, e saber se a conta do usuário é considerada como "verificada" `accountHasVerified`.
 
 ```php
-<?php
-
 namespace App\Models;
 
 use App\Enums\UserStatus;
@@ -298,8 +294,6 @@ class User extends Authenticatable implements MustVerifyEmail
 O enum de `UserStatus` tem o seguinte código:
 
 ```php
-<?php
-
 namespace App\Enums;
 
 enum UserStatus: string
@@ -312,8 +306,6 @@ enum UserStatus: string
 O enum de `UserAccountTypeVerification` tem o seguinte código:
 
 ```php
-<?php
-
 namespace App\Enums;
 
 enum UserAccountTypeVerification: string
@@ -328,8 +320,6 @@ enum UserAccountTypeVerification: string
 Para enviar o code com Twilio, é necessário instalar o pacote oficial para o PHP, que nesse caso é o [`twilio/sdk`](https://github.com/twilio/twilio-php). Após instalá-lo, crie um arquivo chamado `twilio.php` na pasta de `config`, tendo o seguinte conteúdo:
 
 ```php
-<?php
-
 return [
     'number' => env('TWILIO_NUMBER'),
     'account_sid' => env('TWILIO_ACCOUNT_SID'),
@@ -356,8 +346,6 @@ $this->app->bind(SMSClient::class, TwilioClient::class);
 Agora vamos encapsular toda as chamadas ao serviço do Twilio em uma classe com nomes de métodos legíveis ao nosso código, fazendo um contrato entre essa nova classe e o código da aplicação, assim, quando o Client do Twilio mudar, não precisamos refatorar a aplicação em vários locais (se tiver usando diretamente o Client do Twilio ao invés da estratégia abaixo), precisa ser feito em apenas um único local/método, pois toda responsabilidade não fica mais disperso na aplicação, e sim em uma classe encapsulada/responsável por ser uma espécie de "proxy" basicamente entre o Client do Twilio e o código da aplicação. Então, a classe é `TwilioClient` que terá apenas o método `send`, que saberá como enviar o SMS para o usuário. Além do mais, se no futuro o projeto decidir mudar do Twilio para alguma outra ferramenta, é só novamente configurar no _Container do Laravel_ mudando a classe concreta na resolução de `$this->app->bind(SMSClient::class, TwilioClient::class);`.
 
 ```php
-<?php
-
 namespace App\Support\APIs;
 
 use Twilio\Rest\Client;
@@ -386,8 +374,6 @@ class TwilioClient implements SMSClient
 A interface de `SMSClient` tem apenas o contrato do método de `send`:
 
 ```php
-<?php
-
 namespace App\Support\APIs;
 
 interface SMSClient
@@ -425,8 +411,6 @@ Após o usuário se cadastrar, é enviado um code por SMS para o seu telefone ce
 O primeiro Job que será disparado para notificar o usuário via SMS pra que o mesmo posso estar validando seu telefone celular é o `SendUserVerificationCodeBySMS`, com o seguinte código:
 
 ```php
-<?php
-
 namespace App\Jobs;
 
 use App\Models\User;
@@ -496,15 +480,13 @@ public function signup(AuthSignupRequest $request): Response
 
     return response()->json(['user' => $user->commonUserData()]);
 }
-``` 
+```
 
 ## Criando Job para enviar code via e-mail
 
 O Job a seguir será executado no segundo passo, quando o usuário já tiver validado o telefone celular, e precisará validar seu e-mail:
 
 ```php
-<?php
-
 namespace App\Jobs;
 
 use App\Models\User;
@@ -549,8 +531,6 @@ class SendUserVerificationCodeByEmail implements ShouldQueue
 O método de `sendEmailVerificationNotification` na model de `User` é para enviar uma notificação via e-mail, que nesse caso é a `UserVerifyEmail` com o seguinte código:
 
 ```php
-<?php
-
 namespace App\Notifications;
 
 use Illuminate\Notifications\Notification;
@@ -597,8 +577,6 @@ Para validar o code tanto por SMS quanto por e-mail é o mesmo endpoint, mesmo b
 Mais primeiro, deve ser criado o `FormRequest` que valide corretamente o `POST` da request de validação do code, nesse caso, o arquivo de `AuthAccountVerifyRequest`.
 
 ```php
-<?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Validation\Rules\Enum;
@@ -635,8 +613,6 @@ class AuthAccountVerifyRequest extends FormRequest
 Agora, vamos criar uma classe chamada `UserService` pra ser um serviço responsável por manipular tudo aquilo que for relacionado ao usuário, contendo inicialmente os métodos de `accountVerify`, `verifySMSCode` e `verifyEmailCode`, com o seguinte código:
 
 ```php
-<?php
-
 namespace App\Services;
 
 use App\Models\User;
@@ -676,7 +652,7 @@ class UserService
         $this->verifyEmailCode($user, $code, $type);
 
         // Aqui pode ser feito alguma ação de negócio quando ambos os steps (SMS/Telefone e E-mail)
-        // forem validados com sucesso, nesse caso, o code está "ativando" a conta do usuário que 
+        // forem validados com sucesso, nesse caso, o code está "ativando" a conta do usuário que
         // outrora era considerada como "pendente de ativação"
         $user->activateAccount();
     }
@@ -730,8 +706,6 @@ class UserService
 No controller de `RegisterController`, adicione o método de `accountVerify`, com o seguinte código:
 
 ```php
-<?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Services\UserService;
@@ -813,8 +787,6 @@ public function accountVerifyResend(AuthAccountVerifyResendRequest $request): Js
 Crie um `FormRequest` chamado de `AuthAccountVerifyResendRequest` tendo o seguinte código:
 
 ```php
-<?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Validation\Rules\Enum;
@@ -891,8 +863,6 @@ Route::controller(ForgotController::class)->middleware('guest')->group(function 
 O controller de `ForgotController` é responsável por tudo que envolve o "recuperar senha", e tem o seguinte código:
 
 ```php
-<?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Services\UserService;
@@ -957,7 +927,7 @@ class ForgotController extends LaravelBaseController
     public function validateCode(AuthForgotPasswordValidateCodeRequest $request): JsonResponse
     {
         $this->userService->forgotPasswordValidateCode($request->type(), $request->code, $request->email);
-        
+
         return response()->json(status: JsonResponse::HTTP_NO_CONTENT);
     }
 
@@ -1013,8 +983,6 @@ Os `FormRequest` de `AuthResetPasswordRequest`, `AuthForgotPasswordRequest` e `A
 
 *AuthResetPasswordRequest.php*
 ```php
-<?php
-
 namespace App\Http\Requests;
 
 use App\Models\User;
@@ -1049,8 +1017,6 @@ class AuthResetPasswordRequest extends FormRequest
 
 *AuthForgotPasswordRequest.php*
 ```php
-<?php
-
 namespace App\Http\Requests;
 
 use App\Models\User;
@@ -1109,8 +1075,6 @@ class AuthForgotPasswordRequest extends FormRequest
 
 *AuthForgotPasswordValidateCodeRequest.php*
 ```php
-<?php
-
 namespace App\Http\Requests;
 
 use App\Models\User;

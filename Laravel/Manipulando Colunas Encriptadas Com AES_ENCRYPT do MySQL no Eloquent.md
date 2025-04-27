@@ -63,8 +63,6 @@ protected array $encryptedColumns = [
 Primeira coisa a ser feito é criar uma classe **BaseModel**, para sobrescrever o método `newEloquentBuilder` e ter os métodos e propriedades que esssa estratégia requer.
 
 ```php
-<?php
-
 namespace App\Support\ORM;
 
 use Illuminate\Database\Eloquent\Model;
@@ -121,8 +119,6 @@ Deve ser criado um novo **Eloquent Builder** para que a propriedade `$encryptedC
 O método  `setModel` no *query builder* é sobrescrito basicamente adicionando a linha de `$this->query->setEncryptedColumns($model->getEncryptedColumns());` fazendo com que o array de colunas que deve ser encriptados presente na **Model** (`$encryptedColumns`), possa ser utilizado na classe de **Query** (`BaseQueryBuilder`) e **Grammar** (`MySqlGrammarEncrypt`).
 
 ```php
-<?php
-
 namespace App\Support\ORM;
 
 use Illuminate\Database\Eloquent\Model;
@@ -165,8 +161,6 @@ A classe abaixo é usada na manipulação da construção dos *statements* do ba
 O array com as colunas que devem ser encriptados na propriedade `$encryptedColumns` presente na **Model**, está presente na classe abaixo, para que cada coluna possa ser transformada, adicionando `AES_ENCRYPT` ao *statement*.
 
 ```php
-<?php
-
 namespace App\Support\ORM;
 
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -255,8 +249,6 @@ Já configuramos o `INSERT` e o `UPDATE` adicionando a função `AES_ENCRYPT` na
 Para fazer isso, precisamos estender a conexão padrão do MySQL para manipular a construção do `SELECT` na classe de *Grammar* do Laravel, com isso, deve ser criado um `MySqlConnectionEncrypt`, como da seguinte forma:
 
 ```php
-<?php
-
 namespace App\Support\Database\Connections;
 
 use App\Support\ORM\BaseQueryBuilder;
@@ -288,8 +280,6 @@ class MySqlConnectionEncrypt extends MySqlConnection
 Agora é necessário configurar o **service container** do Laravel para que em vez de configurar a conexão padrão do MySQL, deve ser utilizando a classe acima, então, o método `register` do `AppServiceProvider` deve ser como da seguinte forma:
 
 ```php
-<?php
-
 namespace App\Providers;
 
 use Illuminate\Database\Connection;
@@ -321,8 +311,6 @@ Foi necessário substituir o método `compileSelect` exatamente para que as colu
 Além do mais, essa classe encapsulará a **key** (`$AESEncryptKey`) para manipular a encriptação dos dados, e sabe/conhece/responsável por encriptar e decriptar as informações, centralizando, encapsulando em um único local, fazendo com que exista um único local para alteração sendo visível a todos que o utilizam.
 
 ```php
-<?php
-
 namespace App\Support\Database\Query\Grammars;
 
 use InvalidArgumentException;
@@ -359,7 +347,7 @@ class MySqlGrammarEncrypt extends MySqlGrammar
             throw new InvalidArgumentException('Set encryption key in .env file, use this alias APP_AESENCRYPT_KEY');
         }
     }
-    
+
     /**
      * Columns that will be handled encrypted.
      *
@@ -506,11 +494,11 @@ Se for feito: `MyModel::whereId(1)->first()` no Eloquent, a query no banco de da
 SELECT
     *,
     AES_DECRYPT( `colA`, 'secretkey' ) AS 'colA',
-    AES_DECRYPT( `colB`, 'secretkey' ) AS 'colB' 
+    AES_DECRYPT( `colB`, 'secretkey' ) AS 'colB'
 FROM
-    `any_table` 
-WHERE 
-    `id` = 1 
+    `any_table`
+WHERE
+    `id` = 1
 LIMIT 1
 ```
 
@@ -536,7 +524,7 @@ VALUES
         AES_ENCRYPT( 'Nisi neque consectetur', 'secretkey' ),
         'Mussum Ipsum',
         AES_ENCRYPT( 'xyz', 'secretkey' ),
-        'Mussum Ipsum, cacilds vidis litro abertis.' 
+        'Mussum Ipsum, cacilds vidis litro abertis.'
     )
 ```
 
@@ -565,13 +553,13 @@ MyModel::whereId(1)->update([
 Qualquer uma das forma acima terá a mesma instrução de `UPDATE`:
 
 ```sql
-UPDATE 
-    `any_table` 
-SET 
+UPDATE
+    `any_table`
+SET
     `colA` = AES_ENCRYPT( 'ABC', 'secretkey' ),
     `name` = 'XYZ',
     `colB` = AES_ENCRYPT( 'Mussum', 'secretkey' ),
-    `description` = 'Ipsum' 
+    `description` = 'Ipsum'
 WHERE `id` = 1
 ```
 

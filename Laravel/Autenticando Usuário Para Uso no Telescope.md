@@ -100,8 +100,6 @@ Essa rota é [assinada](https://laravel.com/docs/10.x/urls#signed-urls), ou seja
 Para simplificar a geração da URL da rota assinada, crie o seguinte arquivo `app/Console/Commands/MakeUserAuthLink.php`:
 
 ```php
-<?php
-
 namespace App\Console\Commands;
 
 use App\Models\User;
